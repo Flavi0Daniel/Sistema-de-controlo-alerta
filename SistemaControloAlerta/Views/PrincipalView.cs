@@ -1,4 +1,8 @@
 ﻿using FontAwesome.Sharp;
+using SistemaControloAlerta._Repositories;
+using SistemaControloAlerta.Models;
+using SistemaControloAlerta.Presenters;
+using SistemaControloAlerta.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -127,7 +131,7 @@ namespace SistemaControloAlerta.Forms
         }
 
         //Structs
-        private struct RGBColors
+        public struct RGBColors
         {
             public static Color color0 = Color.FromArgb(0, 133, 238);
             public static Color color1 = Color.FromArgb(255, 255, 0);
@@ -135,7 +139,7 @@ namespace SistemaControloAlerta.Forms
         }
 
         //Methods
-        private void ActivateButton(object senderBtn, Color color)
+        public void ActivateButton(object senderBtn, Color color)
         {
             if (senderBtn != null)
             {
@@ -172,7 +176,7 @@ namespace SistemaControloAlerta.Forms
             }
         }
 
-        private void OpenChildForm(Form childForm)
+        public void OpenChildForm(Form childForm)
         {
             //open only form
             if (currentChildForm != null)
@@ -217,14 +221,22 @@ namespace SistemaControloAlerta.Forms
 
         private void BtnListar_Click(object sender, EventArgs e)
         {
+            string connectionString = Properties.Settings.Default.DBConnectionString;
+            IDEPAView view = new FrmListar();
+            IDEPARepository repository = new DEPARepository(connectionString);
+            new ListarDEPAPresenter(view, repository);
             ActivateButton(sender, RGBColors.color1);
-            OpenChildForm(new FrmListar());
+            OpenChildForm((Form)view);
         }
 
         private void BtnAdicionar_Click(object sender, EventArgs e)
         {
+            string connectionString = Properties.Settings.Default.DBConnectionString;
+            IDEPAView view = new FrmAdicionar();
+            IDEPARepository repository = new DEPARepository(connectionString);
+            new ListarDEPAPresenter(view, repository);
             ActivateButton(sender, RGBColors.color1);
-            OpenChildForm(new FrmAdicionar());
+            OpenChildForm((Form)view);
         }
 
         private void BtnAlterarSenha_Click(object sender, EventArgs e)

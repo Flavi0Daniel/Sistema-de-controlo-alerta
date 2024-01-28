@@ -8,10 +8,10 @@ namespace SistemaControloAlerta.Models
 {
     public interface IDEPARepository
     {
-        void Add(DEPA depa);
-        void Edit(DEPA depa);
+        void Add(DEPAModel depa);
+        void Edit(DEPAModel depa);
         void Delete(int id);
-        IEnumerable<DEPA> GetAll();
-        IEnumerable<DEPA> GetByValues(); // Search
+        IEnumerable<DEPAModel> GetAll();
+        IEnumerable<DEPAModel> GetByValue(string value); // Searchs
     }
 }

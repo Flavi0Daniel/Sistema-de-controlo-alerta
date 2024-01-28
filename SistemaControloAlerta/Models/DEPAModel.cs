@@ -14,7 +14,7 @@ using System.ComponentModel;
 
 namespace SistemaControloAlerta.Models
 {
-    public class DEPA
+    public class DEPAModel
     {
         // Fields
         int id;

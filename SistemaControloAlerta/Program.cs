@@ -17,7 +17,7 @@ namespace SistemaControloAlerta
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmListar());
+            Application.Run(new FrmEntrar());
         }
     }
 }

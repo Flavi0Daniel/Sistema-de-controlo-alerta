@@ -86,43 +86,51 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DBDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Views\AlterarSenha.cs">
+    <Compile Include="Presenters\Common\ModelDataValidation.cs" />
+    <Compile Include="Presenters\ListarDEPAPresenter.cs" />
+    <Compile Include="Views\AlterarSenhaView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\AlterarSenha.Designer.cs">
-      <DependentUpon>AlterarSenha.cs</DependentUpon>
+    <Compile Include="Views\AlterarSenhaView.Designer.cs">
+      <DependentUpon>AlterarSenhaView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Entrar.cs">
+    <Compile Include="Views\EditarView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\Entrar.Designer.cs">
-      <DependentUpon>Entrar.cs</DependentUpon>
+    <Compile Include="Views\EditarView.Designer.cs">
+      <DependentUpon>EditarView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Adicionar.cs">
+    <Compile Include="Views\EntrarView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\Adicionar.Designer.cs">
-      <DependentUpon>Adicionar.cs</DependentUpon>
+    <Compile Include="Views\EntrarView.Designer.cs">
+      <DependentUpon>EntrarView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Listar.cs">
+    <Compile Include="Views\AdicionarView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\Listar.Designer.cs">
-      <DependentUpon>Listar.cs</DependentUpon>
+    <Compile Include="Views\AdicionarView.Designer.cs">
+      <DependentUpon>AdicionarView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Notificacoes.cs">
+    <Compile Include="Views\ListarView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\Notificacoes.Designer.cs">
-      <DependentUpon>Notificacoes.cs</DependentUpon>
+    <Compile Include="Views\ListarView.Designer.cs">
+      <DependentUpon>ListarView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Principal.cs">
+    <Compile Include="Views\NotificacoesView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\Principal.Designer.cs">
-      <DependentUpon>Principal.cs</DependentUpon>
+    <Compile Include="Views\NotificacoesView.Designer.cs">
+      <DependentUpon>NotificacoesView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\DEPA.cs" />
+    <Compile Include="Views\PrincipalView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\PrincipalView.Designer.cs">
+      <DependentUpon>PrincipalView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DEPAModel.cs" />
     <Compile Include="Models\IDEPARepository.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -130,23 +138,28 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Views\IDEPAView.cs" />
-    <EmbeddedResource Include="Views\Adicionar.resx">
-      <DependentUpon>Adicionar.cs</DependentUpon>
+    <Compile Include="_Repositories\BaseRepository.cs" />
+    <Compile Include="_Repositories\DEPARepository.cs" />
+    <EmbeddedResource Include="Views\AdicionarView.resx">
+      <DependentUpon>AdicionarView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\AlterarSenha.resx">
-      <DependentUpon>AlterarSenha.cs</DependentUpon>
+    <EmbeddedResource Include="Views\AlterarSenhaView.resx">
+      <DependentUpon>AlterarSenhaView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Entrar.resx">
-      <DependentUpon>Entrar.cs</DependentUpon>
+    <EmbeddedResource Include="Views\EditarView.resx">
+      <DependentUpon>EditarView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Listar.resx">
-      <DependentUpon>Listar.cs</DependentUpon>
+    <EmbeddedResource Include="Views\EntrarView.resx">
+      <DependentUpon>EntrarView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Notificacoes.resx">
-      <DependentUpon>Notificacoes.cs</DependentUpon>
+    <EmbeddedResource Include="Views\ListarView.resx">
+      <DependentUpon>ListarView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Principal.resx">
-      <DependentUpon>Principal.cs</DependentUpon>
+    <EmbeddedResource Include="Views\NotificacoesView.resx">
+      <DependentUpon>NotificacoesView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\PrincipalView.resx">
+      <DependentUpon>PrincipalView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -207,8 +220,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Presenters\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
