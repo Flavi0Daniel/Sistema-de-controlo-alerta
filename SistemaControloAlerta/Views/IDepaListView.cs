@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace SistemaControloAlerta.Views
 {
-    public interface IDEPAView
+    public interface IDepaListView
     {
         // properties - Fields;
 
@@ -25,14 +25,12 @@ namespace SistemaControloAlerta.Views
 
         // Events
         event EventHandler SearchEvent;
-        event EventHandler AddNewEvent;
         event EventHandler EditEvent;
         event EventHandler DeleteEvent;
-        event EventHandler SaveEvent;
-        event EventHandler CancelEvent;
 
         //Methods
         void SetDEPAListBindingSource(BindingSource depaList);
-        void Show(); // Optional
+
+        void Close();
     }
 }

@@ -1,25 +1,22 @@
-﻿using SistemaControloAlerta.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.SqlClient;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SistemaControloAlerta._Repositories
+namespace SistemaControloAlerta.Models
 {
-    public class DepaRepository : BaseRepository, IDepaRepository
+    public class DepaDbContext
     {
 
-        // Constructor
-        public DepaRepository(string connectionString) {
-            this.connectionString = connectionString;
-        }
+        private string connectionString = Properties.Settings.Default.DBConnectionString;
 
         // Methods
         public void Add(DepaModel depa)
         {
+
             using (var connection = new SqlConnection(connectionString))
             using (var command = connection.CreateCommand())
             {
@@ -74,7 +71,8 @@ namespace SistemaControloAlerta._Repositories
         {
             var depaList = new List<DepaModel>();
             using (var connection = new SqlConnection(connectionString))
-            using (var command = connection.CreateCommand()) {
+            using (var command = connection.CreateCommand())
+            {
                 string query = "SELECT * FROM tbl_Depart_Est_Plan_Anal ORDER BY Num DESC";
                 connection.Open();
                 command.CommandText = query;

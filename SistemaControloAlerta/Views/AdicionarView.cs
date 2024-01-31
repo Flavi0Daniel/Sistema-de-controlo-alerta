@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace SistemaControloAlerta.Forms
 {
-    public partial class FrmAdicionar : Form, IDEPAView
+    public partial class FrmAdicionar : Form, IDepaAddView
     {
 
         private string message;

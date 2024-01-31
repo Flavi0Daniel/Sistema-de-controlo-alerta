@@ -222,21 +222,22 @@ namespace SistemaControloAlerta.Forms
         private void BtnListar_Click(object sender, EventArgs e)
         {
             string connectionString = Properties.Settings.Default.DBConnectionString;
-            IDEPAView view = new FrmListar();
-            IDEPARepository repository = new DEPARepository(connectionString);
-            new ListarDEPAPresenter(view, repository);
+            IDepaListView view1 = new FrmListar();
+            IDepaEditView view3 = new FrmEditar();
+            IDepaRepository repository = new DepaRepository(connectionString);
+            new DepaPresenter(view1, view3, repository);
             ActivateButton(sender, RGBColors.color1);
-            OpenChildForm((Form)view);
+            OpenChildForm((Form)view1);
         }
 
         private void BtnAdicionar_Click(object sender, EventArgs e)
         {
             string connectionString = Properties.Settings.Default.DBConnectionString;
-            IDEPAView view = new FrmAdicionar();
-            IDEPARepository repository = new DEPARepository(connectionString);
-            new ListarDEPAPresenter(view, repository);
+            IDepaAddView view1 = new FrmAdicionar();
+            IDepaRepository repository = new DepaRepository(connectionString);
+            new DepaPresenter(view1, repository);
             ActivateButton(sender, RGBColors.color1);
-            OpenChildForm((Form)view);
+            OpenChildForm((Form)view1);
         }
 
         private void BtnAlterarSenha_Click(object sender, EventArgs e)

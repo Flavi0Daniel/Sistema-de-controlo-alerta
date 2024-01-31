@@ -16,7 +16,7 @@ using System.Windows.Navigation;
 
 namespace SistemaControloAlerta.Forms
 {
-    public partial class FrmListar : Form, IDEPAView
+    public partial class FrmListar : Form, IDepaListView
     {
         private string message;
         private int id;
@@ -63,7 +63,7 @@ namespace SistemaControloAlerta.Forms
         public string SearchValue { get => TxtSearch.Text; set => TxtSearch.Text = value; }
         public bool IsEdit { get => isEdit; set => isEdit = value; }
         public bool IsSuccessful { get => isSuccessful; set => isSuccessful = value; }
-        public string Message { get => message; set => Message = value; }
+        public string Message { get => message; set => message = value; }
 
         // Events
         public event EventHandler SearchEvent;
@@ -77,6 +77,10 @@ namespace SistemaControloAlerta.Forms
         public void SetDEPAListBindingSource(BindingSource depaList)
         {
             DgvDEPA.DataSource = depaList;
+        }
+
+        public new void Close() {
+            this.Close();
         }
 
         private void DgvDEPA_Resize(object sender, EventArgs e)
@@ -124,9 +128,9 @@ namespace SistemaControloAlerta.Forms
             var frmPrincipal = (FrmPrincipal) Application.OpenForms.Cast<Form>().FirstOrDefault(c => c is FrmPrincipal && true);
             
             string connectionString = Properties.Settings.Default.DBConnectionString;
-            IDEPAView view = new FrmEditar();
-            IDEPARepository repository = new DEPARepository(connectionString);
-            new ListarDEPAPresenter(view, repository);
+            IDepaEditView view = new FrmEditar();
+            IDepaRepository repository = new DepaRepository(connectionString);
+            new DepaPresenter(view, repository);
             // frmPrincipal.ActivateButton(sender, FrmPrincipal.RGBColors.color1);
             frmPrincipal.OpenChildForm((Form)view);
         }

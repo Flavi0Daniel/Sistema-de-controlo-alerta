@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace SistemaControloAlerta.Models
 {
-    public interface IDEPARepository
+    public interface IDepaRepository
     {
-        void Add(DEPAModel depa);
-        void Edit(DEPAModel depa);
+        void Add(DepaModel depa);
+        void Edit(DepaModel depa);
         void Delete(int id);
-        IEnumerable<DEPAModel> GetAll();
-        IEnumerable<DEPAModel> GetByValue(string value); // Searchs
+        IEnumerable<DepaModel> GetAll();
+        IEnumerable<DepaModel> GetByValue(string value); // Searchs
     }
 }

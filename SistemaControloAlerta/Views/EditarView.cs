@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace SistemaControloAlerta.Views
 {
-    public partial class FrmEditar : Form, IDEPAView
+    public partial class FrmEditar : Form, IDepaEditView
     {
 
         private string message;
@@ -47,9 +47,9 @@ namespace SistemaControloAlerta.Views
 
         }
 
-        public void SetDEPAListBindingSource(BindingSource depaList)
+        public new void Close()
         {
-            // do something
+            this.Close();
         }
 
         // Fields
@@ -64,7 +64,6 @@ namespace SistemaControloAlerta.Views
         public bool IsEdit { get => isEdit; set => IsEdit = value; }
         public bool IsSuccessful { get => isSuccessful; set => isSuccessful = value; }
         public string Message { get => message; set => Message = value; }
-        public string SearchValue { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         // Events
         public event EventHandler SearchEvent;
