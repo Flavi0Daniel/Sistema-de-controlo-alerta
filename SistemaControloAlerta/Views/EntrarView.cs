@@ -1,4 +1,7 @@
-﻿using SistemaControloAlerta.Forms;
+﻿using SistemaControloAlerta._Repositories;
+using SistemaControloAlerta.Forms;
+using SistemaControloAlerta.Presenters;
+using SistemaControloAlerta.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -149,11 +152,12 @@ namespace SistemaControloAlerta
 
         private void BtnEntrar_Click(object sender, EventArgs e)
         {
-            FrmPrincipal frmPrincipal = new FrmPrincipal();
+         
+            DepaView view = new DepaView();
 
             this.Hide();
 
-            frmPrincipal.Show();
+            view.Show();
         }
     }
 }

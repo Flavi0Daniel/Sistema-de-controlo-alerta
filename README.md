@@ -8,6 +8,16 @@ Video usada para fazer o design...
 
 https://www.youtube.com/watch?v=5AsJJl7Bhvc
 
+Alguns videos / artigos uteis
+
+https://www.youtube.com/watch?v=QTWKUkiEqpQ
+
+https://www.c-sharpcorner.com/UploadFile/f9f215/how-to-minimize-your-application-to-system-tray-in-C-Sharp/
+
+https://www.codeproject.com/Articles/5274751/Understanding-the-SynchronizationContext-in-NET-wi
+
+https://www.c-sharpcorner.com/article/timer-in-C-Sharp/
+
 Ferramentas crackeadas usadas...
 
 https://ftuapps.dev/guna-ui-framework-ultimate-v2-0-0-1-keygen/

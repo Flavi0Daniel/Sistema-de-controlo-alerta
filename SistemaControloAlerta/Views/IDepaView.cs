@@ -1,13 +1,14 @@
 ﻿using System;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace SistemaControloAlerta.Views
 {
-    public interface IDepaListView
+    public interface IDepaView
     {
         // properties - Fields;
 
-        int Id { get; set; }
+        string Id { get; set; }
         string Assunto { get; set; }
         string Conteudo_despacho { get; set; }
         string Area_afectada { get; set; }
@@ -27,10 +28,15 @@ namespace SistemaControloAlerta.Views
         event EventHandler SearchEvent;
         event EventHandler EditEvent;
         event EventHandler DeleteEvent;
+        event EventHandler AddNewEvent;
+        event EventHandler CancelEvent;
+        event EventHandler SaveEvent;
 
         //Methods
         void SetDEPAListBindingSource(BindingSource depaList);
 
-        void Close();
+        void OnCountAlerts(Func<int> alerts, SynchronizationContext synchronizationContext, System.Timers.Timer timer);
+
+        void OnClose();
     }
 }

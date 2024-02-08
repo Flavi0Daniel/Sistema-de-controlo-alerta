@@ -88,49 +88,23 @@
     </Compile>
     <Compile Include="Presenters\Common\ModelDataValidation.cs" />
     <Compile Include="Presenters\DepaPresenter.cs" />
-    <Compile Include="Views\AlterarSenhaView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\AlterarSenhaView.Designer.cs">
-      <DependentUpon>AlterarSenhaView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\EditarView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\EditarView.Designer.cs">
-      <DependentUpon>EditarView.cs</DependentUpon>
-    </Compile>
     <Compile Include="Views\EntrarView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\EntrarView.Designer.cs">
       <DependentUpon>EntrarView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\AdicionarView.cs">
+    <Compile Include="Views\Form_Alert.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\AdicionarView.Designer.cs">
-      <DependentUpon>AdicionarView.cs</DependentUpon>
+    <Compile Include="Views\Form_Alert.Designer.cs">
+      <DependentUpon>Form_Alert.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\IDepaAddView.cs" />
-    <Compile Include="Views\IDEPAEditView.cs" />
-    <Compile Include="Views\ListarView.cs">
+    <Compile Include="Views\DepaView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\ListarView.Designer.cs">
-      <DependentUpon>ListarView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\NotificacoesView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\NotificacoesView.Designer.cs">
-      <DependentUpon>NotificacoesView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\PrincipalView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\PrincipalView.Designer.cs">
-      <DependentUpon>PrincipalView.cs</DependentUpon>
+    <Compile Include="Views\DepaView.Designer.cs">
+      <DependentUpon>DepaView.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\DepaModel.cs" />
     <Compile Include="Models\IDepaRepository.cs" />
@@ -139,29 +113,17 @@
     <Compile Include="Utils\Button_WOC.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Views\IDepaListView.cs" />
+    <Compile Include="Views\IDepaView.cs" />
     <Compile Include="_Repositories\BaseRepository.cs" />
     <Compile Include="_Repositories\DepaRepository.cs" />
-    <EmbeddedResource Include="Views\AdicionarView.resx">
-      <DependentUpon>AdicionarView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\AlterarSenhaView.resx">
-      <DependentUpon>AlterarSenhaView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\EditarView.resx">
-      <DependentUpon>EditarView.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Views\EntrarView.resx">
       <DependentUpon>EntrarView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ListarView.resx">
-      <DependentUpon>ListarView.cs</DependentUpon>
+    <EmbeddedResource Include="Views\Form_Alert.resx">
+      <DependentUpon>Form_Alert.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\NotificacoesView.resx">
-      <DependentUpon>NotificacoesView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\PrincipalView.resx">
-      <DependentUpon>PrincipalView.cs</DependentUpon>
+    <EmbeddedResource Include="Views\DepaView.resx">
+      <DependentUpon>DepaView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -209,6 +171,11 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="DB\SQL.sql" />
+    <None Include="Resources\warning.png" />
+    <None Include="Resources\success.png" />
+    <None Include="Resources\info.png" />
+    <None Include="Resources\icons8_cancel_25px.png" />
+    <None Include="Resources\error.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">

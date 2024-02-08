@@ -75,7 +75,19 @@ namespace SistemaControloAlerta._Repositories
             var depaList = new List<DepaModel>();
             using (var connection = new SqlConnection(connectionString))
             using (var command = connection.CreateCommand()) {
-                string query = "SELECT * FROM tbl_Depart_Est_Plan_Anal ORDER BY Num DESC";
+                string query = @"SELECT Num, Assunto, conteudo_Despacho, Area_Afectada, Numero_de_oficio, Data_Orientacao, Prazo, Obs,
+                        CASE
+                            WHEN CONVERT(DATE, GETDATE()) > CONVERT(DATE, Prazo) THEN 'VENCEU'
+                            WHEN CONVERT(DATE, GETDATE()) = CONVERT(DATE, Prazo) THEN 'VENCEU HOJE'
+                            ELSE (CAST(DATEDIFF(DAY, CONVERT(DATE, GETDATE()), CONVERT(DATE, Prazo)) AS NVARCHAR) + ' DIAS PARA VENCER') 
+                        END AS Alerta,
+                        CASE
+                            WHEN Obs = 'CUMPRIDA' THEN 'CUMPRIDA'
+                            WHEN Obs = 'NÃO CUMPRIDA' THEN 'NÃO CUMPRIDA'
+                            ELSE ''
+                        END AS [Grau de comprimento]
+                    FROM
+                        tbl_Depart_Est_Plan_Anal ORDER BY Num DESC";
                 connection.Open();
                 command.CommandText = query;
                 using (var reader = command.ExecuteReader())
@@ -91,6 +103,47 @@ namespace SistemaControloAlerta._Repositories
                         depaModel.Data_orientacao = DateTime.Parse(reader[5].ToString());
                         depaModel.Prazo = DateTime.Parse(reader[6].ToString());
                         depaModel.Obs = reader[7].ToString();
+                        depaModel.Alerta = reader[8].ToString();
+                        depaModel.GrauCumprimento = reader[9].ToString();
+                        depaList.Add(depaModel);
+                    }
+                }
+            }
+            return depaList;
+        }
+
+        public IEnumerable<DepaModel> GetAllNotifications()
+        {
+            var depaList = new List<DepaModel>();
+            using (var connection = new SqlConnection(connectionString))
+            using (var command = connection.CreateCommand())
+            {
+                string query = @"CREATE OR ALTER VIEW notifications AS
+                SELECT Num, Prazo,
+                        CASE
+                            WHEN CONVERT(DATE, GETDATE()) > CONVERT(DATE, Prazo) THEN 'VENCEU'
+                            WHEN CONVERT(DATE, GETDATE()) = CONVERT(DATE, Prazo) THEN 'VENCEU HOJE'
+                            ELSE (CAST(DATEDIFF(DAY, CONVERT(DATE, GETDATE()), CONVERT(DATE, Prazo)) AS NVARCHAR) + ' DIAS PARA VENCER') 
+                        END AS Alerta,
+                        CASE
+                            WHEN Obs = 'CUMPRIDA' THEN 'CUMPRIDA'
+                            WHEN Obs = 'NÃO CUMPRIDA' THEN 'NÃO CUMPRIDA'
+                            ELSE ''
+                        END AS [Grau de comprimento]
+                    FROM
+                        tbl_Depart_Est_Plan_Anal";
+                connection.Open();
+                command.CommandText = query;
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var depaModel = new DepaModel();
+                        depaModel.Id = (int)reader[0];
+                        depaModel.Assunto = reader[1].ToString();
+                        depaModel.Prazo = DateTime.Parse(reader[2].ToString());
+                        depaModel.Alerta = reader[3].ToString();
+                        depaModel.GrauCumprimento = reader[4].ToString();
                         depaList.Add(depaModel);
                     }
                 }
@@ -106,7 +159,19 @@ namespace SistemaControloAlerta._Repositories
             using (var connection = new SqlConnection(connectionString))
             using (var command = connection.CreateCommand())
             {
-                string query = @"SELECT * FROM tbl_Depart_Est_Plan_Anal WHERE Num=@id or Assunto LIKE '%'+@assunto+'%' ORDER BY Num DESC";
+                string query = @"SELECT Num, Assunto, conteudo_Despacho, Area_Afectada, Numero_de_oficio, Data_Orientacao, Prazo, Obs,
+                        CASE
+                            WHEN CONVERT(DATE, GETDATE()) > CONVERT(DATE, Prazo) THEN 'VENCEU'
+                            WHEN CONVERT(DATE, GETDATE()) = CONVERT(DATE, Prazo) THEN 'VENCEU HOJE'
+                            ELSE (CAST(DATEDIFF(DAY, CONVERT(DATE, GETDATE()), CONVERT(DATE, Prazo)) AS NVARCHAR) + ' DIAS PARA VENCER') 
+                        END AS Alerta,
+                        CASE
+                            WHEN Obs = 'CUMPRIDA' THEN 'CUMPRIDA'
+                            WHEN Obs = 'NÃO CUMPRIDA' THEN 'NÃO CUMPRIDA'
+                            ELSE ''
+                        END AS [Grau de comprimento]
+                    FROM
+                        tbl_Depart_Est_Plan_Anal WHERE Num=@id or Assunto LIKE '%'+@assunto+'%' ORDER BY Num DESC";
                 connection.Open();
                 command.CommandText = query;
                 command.Parameters.Add("@id", SqlDbType.Int).Value = depaId;
@@ -124,11 +189,58 @@ namespace SistemaControloAlerta._Repositories
                         depaModel.Data_orientacao = DateTime.Parse(reader[5].ToString());
                         depaModel.Prazo = DateTime.Parse(reader[6].ToString());
                         depaModel.Obs = reader[7].ToString();
+                        depaModel.Alerta = reader[8].ToString();
+                        depaModel.GrauCumprimento = reader[9].ToString();
                         depaList.Add(depaModel);
                     }
                 }
             }
             return depaList;
+        }
+
+        public int CountAlerts()
+        {
+            var depaList = new List<DepaModel>();
+            using (var connection = new SqlConnection(connectionString))
+            using (var command = connection.CreateCommand())
+            {
+                connection.Open();
+
+                string query = @"CREATE OR ALTER VIEW notifications AS
+                SELECT Num, Assunto, Prazo,
+                        CASE
+                            WHEN CONVERT(DATE, GETDATE()) > CONVERT(DATE, Prazo) THEN 'VENCEU'
+                            WHEN CONVERT(DATE, GETDATE()) = CONVERT(DATE, Prazo) THEN 'VENCEU HOJE'
+                            ELSE (CAST(DATEDIFF(DAY, CONVERT(DATE, GETDATE()), CONVERT(DATE, Prazo)) AS NVARCHAR) + ' DIAS PARA VENCER') 
+                        END AS Alerta,
+                        CASE
+                            WHEN Obs = 'CUMPRIDA' THEN 'CUMPRIDA'
+                            WHEN Obs = 'NÃO CUMPRIDA' THEN 'NÃO CUMPRIDA'
+                            ELSE ''
+                        END AS [Grau de comprimento]
+                    FROM
+                        tbl_Depart_Est_Plan_Anal";
+
+                command.CommandText = query;
+                command.ExecuteNonQuery();
+
+                query = @"select * FROM notifications WHERE Alerta = 'VENCEU'";
+                command.CommandText = query;
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var depaModel = new DepaModel();
+                        depaModel.Id = (int)reader[0];
+                        depaModel.Assunto = reader[1].ToString();
+                        depaModel.Prazo = DateTime.Parse(reader[2].ToString());
+                        depaModel.Alerta = reader[3].ToString();
+                        depaModel.GrauCumprimento = reader[4].ToString();
+                        depaList.Add(depaModel);
+                    }
+                }
+            }
+            return depaList.Count;
         }
     }
 }
