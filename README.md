@@ -18,6 +18,12 @@ https://www.codeproject.com/Articles/5274751/Understanding-the-SynchronizationCo
 
 https://www.c-sharpcorner.com/article/timer-in-C-Sharp/
 
+https://www.youtube.com/watch?v=SsMIQXOn24U
+
+https://www.c-sharpcorner.com/UploadFile/f9f215/how-to-restrict-the-application-to-just-one-instance/
+
+https://www.macoratti.net/16/02/c_mutex1.htm
+
 Ferramentas crackeadas usadas...
 
 https://ftuapps.dev/guna-ui-framework-ultimate-v2-0-0-1-keygen/

@@ -4,7 +4,11 @@ using SistemaControloAlerta.Presenters;
 using SistemaControloAlerta.Views;
 using System;
 using System.Drawing;
+using System.IO;
+using System.IO.Pipes;
 using System.Runtime.InteropServices;
+using System.Security.AccessControl;
+using System.Security.Principal;
 using System.Threading;
 using System.Timers;
 using System.Windows.Forms;
@@ -52,6 +56,8 @@ namespace SistemaControloAlerta.Forms
         private const int seconds = 1000;
         private bool isHide = false;
 
+        private NamedPipeServerStream _pipeServer;
+
         public DepaView()
         {
             InitializeComponent();
@@ -70,6 +76,66 @@ namespace SistemaControloAlerta.Forms
             this.ControlBox = this.MaximizeBox = this.MinimizeBox = false;
             this.DoubleBuffered = true;
             this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
+        }
+
+        private void NamedPipeServerCreateServer()
+        {
+            var ps = new PipeSecurity();
+            var sid = new SecurityIdentifier(WellKnownSidType.WorldSid, null);
+            var everyone = sid.Translate(typeof(NTAccount));
+            ps.SetAccessRule(new PipeAccessRule(everyone, PipeAccessRights.ReadWrite, AccessControlType.Allow));
+
+            // Create pipe and start the async connection wait
+            _pipeServer = new NamedPipeServerStream(
+                "DEPAPIPE",
+                PipeDirection.In,
+                1,
+                PipeTransmissionMode.Message,
+                PipeOptions.Asynchronous,
+                4028,
+                4028,
+                ps);
+
+            // Begin async wait for connections
+            _pipeServer.BeginWaitForConnection(OnPipeConnected, null);
+            
+        }
+
+        private void OnPipeConnected(IAsyncResult ar)
+        {
+            try
+            {
+                _pipeServer.EndWaitForConnection(ar);
+
+                using (StreamReader reader = new StreamReader(_pipeServer))
+                {
+                    string command = reader.ReadLine();
+                    if (command == "ActivateWindow")
+                    {
+
+                        /// InvokeRequired indica se a chamada para Show() precisa ser feita na thread principal.
+                        /// Se InvokeRequired for true, a chamada para Show() é feita na thread principal usando Invoke().
+                        /// Se InvokeRequired for false, a chamada para Show() pode ser feita diretamente, pois já está na thread principal.
+
+                        if (InvokeRequired)
+                        {
+                            Invoke((MethodInvoker)delegate { ntfIconClicked(); });
+                        }
+                        else
+                        {
+                            ntfIconClicked();
+                        }
+
+                    }
+                }
+
+                _pipeServer.Dispose();
+                NamedPipeServerCreateServer();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void AssociateAndRaiseViewEvents()
@@ -360,6 +426,10 @@ namespace SistemaControloAlerta.Forms
             LblDesktop.Top = h;
             LblDesktop.Left = w;
 
+            //PIPE
+
+            NamedPipeServerCreateServer();
+
         }
 
         private void BtnListar_Click(object sender, EventArgs e)
@@ -464,9 +534,12 @@ namespace SistemaControloAlerta.Forms
             ntfIconClicked();
         }
 
-        public void ntfIconClicked() { 
+        public void ntfIconClicked()
+        {
             Show();
-            BringToFront();
+            this.TopMost = true;
+            Activate();
+            this.TopMost = false;
             WindowState = FormWindowState.Normal;
             ntfIcon.Visible = false;
             isHide = false;
@@ -500,6 +573,11 @@ namespace SistemaControloAlerta.Forms
                     row.Cells[8].Style.BackColor = Color.Orange;
                 }
             }
+        }
+
+        private void DepaView_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            
         }
     }
 }

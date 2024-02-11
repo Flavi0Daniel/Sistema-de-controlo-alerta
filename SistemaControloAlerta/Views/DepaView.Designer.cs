@@ -752,6 +752,7 @@
             this.Padding = new System.Windows.Forms.Padding(3);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DEPA";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DepaView_FormClosing);
             this.Load += new System.EventHandler(this.DepaView_Load);
             this.PanelMenu.ResumeLayout(false);
             this.guna2Panel1.ResumeLayout(false);
