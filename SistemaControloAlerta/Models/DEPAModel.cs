@@ -25,6 +25,8 @@ namespace SistemaControloAlerta.Models
         DateTime data_orientacao;
         DateTime prazo;
         string obs;
+        string alerta;
+        string grau_cumprimento;
 
         // properties - Validations
         [DisplayName("Nº")]
@@ -57,5 +59,10 @@ namespace SistemaControloAlerta.Models
         [DisplayName("OBS")]
         [Required(ErrorMessage = "Campo obrigatório")]
         public string Obs { get => obs; set => obs = value; }
+        [DisplayName("Alerta")]
+        public string Alerta { get => alerta; set => alerta = value; }
+        [DisplayName("Grau de cumprimento")]
+        public string GrauCumprimento { get => grau_cumprimento; set => grau_cumprimento = value; }
+
     }
 }

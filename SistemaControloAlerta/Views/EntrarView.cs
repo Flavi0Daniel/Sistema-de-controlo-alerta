@@ -1,4 +1,6 @@
-﻿using SistemaControloAlerta.Forms;
+﻿using SistemaControloAlerta._Repositories;
+using SistemaControloAlerta.Presenters;
+using SistemaControloAlerta.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,6 +16,9 @@ namespace SistemaControloAlerta
 {
     public partial class FrmEntrar : Form
     {
+
+        string resultado;
+
         public FrmEntrar()
         {
             InitializeComponent();
@@ -133,7 +138,7 @@ namespace SistemaControloAlerta
 
         private void BtnSair_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            Close();
         }
 
         //Drag Form
@@ -149,11 +154,31 @@ namespace SistemaControloAlerta
 
         private void BtnEntrar_Click(object sender, EventArgs e)
         {
-            FrmPrincipal frmPrincipal = new FrmPrincipal();
+            resultado = TxtSenha.Text;
+            Close();
+        }
 
-            this.Hide();
 
-            frmPrincipal.Show();
+        public static string InputBoxDialog()
+
+        {
+
+            FrmEntrar ib = new FrmEntrar();
+
+            ib.ShowDialog();
+
+            string s = ib.resultado;
+
+            ib.Close();
+
+            if (s == string.Empty)
+
+                return "";
+
+            else
+
+                return s;
+
         }
     }
 }
