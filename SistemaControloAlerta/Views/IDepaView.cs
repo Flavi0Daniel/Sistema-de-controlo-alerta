@@ -8,7 +8,7 @@ namespace SistemaControloAlerta.Views
     {
         // properties - Fields;
 
-        string Id { get; set; }
+        string DepaId { get; set; }
         string Assunto { get; set; }
         string Conteudo_despacho { get; set; }
         string Area_afectada { get; set; }
@@ -16,6 +16,10 @@ namespace SistemaControloAlerta.Views
         DateTime Data_orientacao { get; set; }
         DateTime Prazo { get; set; }
         string Obs { get; set; }
+
+        string SenhaAtual { get; set; }
+
+        string SenhaNova { get; set; }
 
         string SearchValue { get; set; }
 
@@ -25,12 +29,15 @@ namespace SistemaControloAlerta.Views
         string Message { get; set; }
 
         // Events
-        event EventHandler SearchEvent;
-        event EventHandler EditEvent;
-        event EventHandler DeleteEvent;
-        event EventHandler AddNewEvent;
-        event EventHandler CancelEvent;
-        event EventHandler SaveEvent;
+        event EventHandler DepaSearchEvent;
+        event EventHandler DepaEditEvent;
+        event EventHandler DepaDeleteEvent;
+        event EventHandler DepaAddNewEvent;
+        event EventHandler DepaCancelEvent;
+        event EventHandler DepaSaveEvent;
+
+        event EventHandler UsuarioCancelEvent;
+        event EventHandler UsuarioSaveEvent;
 
         //Methods
         void SetDEPAListBindingSource(BindingSource depaList);

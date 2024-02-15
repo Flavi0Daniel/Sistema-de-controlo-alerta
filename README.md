@@ -24,6 +24,8 @@ https://www.c-sharpcorner.com/UploadFile/f9f215/how-to-restrict-the-application-
 
 https://www.macoratti.net/16/02/c_mutex1.htm
 
+https://www.macoratti.net/10/10/c_inbox.htm
+
 Ferramentas crackeadas usadas...
 
 https://ftuapps.dev/guna-ui-framework-ultimate-v2-0-0-1-keygen/

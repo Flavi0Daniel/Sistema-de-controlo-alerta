@@ -1,5 +1,5 @@
-﻿using SistemaControloAlerta.Forms;
-using SistemaControloAlerta.Properties;
+﻿using SistemaControloAlerta.Properties;
+using SistemaControloAlerta.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

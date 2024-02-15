@@ -84,6 +84,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\IUsuarioRepository.cs" />
+    <Compile Include="Models\NiveisAcesso.cs" />
+    <Compile Include="Models\UsuarioModel.cs" />
     <Compile Include="Presenters\Common\ModelDataValidation.cs" />
     <Compile Include="Presenters\DepaPresenter.cs" />
     <Compile Include="Views\EntrarView.cs">
@@ -114,6 +117,7 @@
     <Compile Include="Views\IDepaView.cs" />
     <Compile Include="_Repositories\BaseRepository.cs" />
     <Compile Include="_Repositories\DepaRepository.cs" />
+    <Compile Include="_Repositories\UsuarioRepository.cs" />
     <EmbeddedResource Include="Views\EntrarView.resx">
       <DependentUpon>EntrarView.cs</DependentUpon>
     </EmbeddedResource>

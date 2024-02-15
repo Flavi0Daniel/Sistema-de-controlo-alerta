@@ -1,7 +1,6 @@
 ﻿using FontAwesome.Sharp;
 using SistemaControloAlerta._Repositories;
 using SistemaControloAlerta.Presenters;
-using SistemaControloAlerta.Views;
 using System;
 using System.Drawing;
 using System.IO;
@@ -13,7 +12,7 @@ using System.Threading;
 using System.Timers;
 using System.Windows.Forms;
 
-namespace SistemaControloAlerta.Forms
+namespace SistemaControloAlerta.Views
 {
     public partial class DepaView : Form, IDepaView
     {
@@ -28,10 +27,9 @@ namespace SistemaControloAlerta.Forms
         private bool isEdit;
 
         private DepaPresenter depaPresenter;
-        String conn = Properties.Settings.Default.DBConnectionString;
 
         // Properties
-        public string Id { get => txtNumero.Text; set => txtNumero.Text = value; }
+        public string DepaId { get => txtNumero.Text; set => txtNumero.Text = value; }
         public string Assunto { get => RtbAssunto.Text; set => RtbAssunto.Text = value; }
         public string Conteudo_despacho { get => RtbCounteudoDespacho.Text; set => RtbCounteudoDespacho.Text = value; }
         public string Area_afectada { get => TxtAreAfetada.Text; set => TxtAreAfetada.Text = value; }
@@ -44,16 +42,24 @@ namespace SistemaControloAlerta.Forms
         public bool IsSuccessful { get => isSuccessful; set => isSuccessful = value; }
         public string Message { get => message; set => message = value; }
 
+        public string SenhaAtual { get => txtSenhaActual.Text; set => txtSenhaActual.Text = value; }
+
+        public string SenhaNova { get => txtNovaSenha.Text; set => txtNovaSenha.Text = value; }
+
         // Events
-        public event EventHandler SearchEvent;
-        public event EventHandler AddNewEvent;
-        public event EventHandler EditEvent;
-        public event EventHandler DeleteEvent;
-        public event EventHandler SaveEvent;
-        public event EventHandler CancelEvent;
+        public event EventHandler DepaSearchEvent;
+        public event EventHandler DepaAddNewEvent;
+        public event EventHandler DepaEditEvent;
+        public event EventHandler DepaDeleteEvent;
+        public event EventHandler DepaSaveEvent;
+        public event EventHandler DepaCancelEvent;
+
+        public event EventHandler UsuarioSaveEvent;
+        public event EventHandler UsuarioCancelEvent;
 
         //Others
-        private const int seconds = 1000;
+        private const int secondsInHour = 3600000;
+        private const int hour = 1;
         private bool isHide = false;
 
         private NamedPipeServerStream _pipeServer;
@@ -62,7 +68,7 @@ namespace SistemaControloAlerta.Forms
         {
             InitializeComponent();
 
-            depaPresenter = new DepaPresenter(this, new DepaRepository(conn));
+            depaPresenter = new DepaPresenter(this);
 
             AssociateAndRaiseViewEvents();
 
@@ -143,14 +149,14 @@ namespace SistemaControloAlerta.Forms
             // Search button
             BtnPesquisar.Click += (s, e) =>
             {
-                SearchEvent?.Invoke(this, EventArgs.Empty);
+                DepaSearchEvent?.Invoke(this, EventArgs.Empty);
             };
 
             TxtSearch.KeyDown += (s, e) =>
             {
                 if (e.KeyCode == Keys.Enter)
                 {
-                    SearchEvent?.Invoke(this, EventArgs.Empty);
+                    DepaSearchEvent?.Invoke(this, EventArgs.Empty);
                 }
             };
 
@@ -158,7 +164,7 @@ namespace SistemaControloAlerta.Forms
             // Save button
             btnSalvar.Click += delegate
             {
-                SaveEvent?.Invoke(this, EventArgs.Empty);
+                DepaSaveEvent?.Invoke(this, EventArgs.Empty);
                 if (isSuccessful)
                 {
                     // Do something
@@ -167,11 +173,29 @@ namespace SistemaControloAlerta.Forms
                 MessageBox.Show(Message);
             };
 
+            btnAlterar.Click += delegate
+            {
+                UsuarioSaveEvent?.Invoke(this, EventArgs.Empty);
+                if (isSuccessful)
+                {
+                    // Do something
+                }
+                MessageBox.Show(Message);
+            };
+
 
             // Cancel button
             btnCancelar.Click += delegate
             {
-                CancelEvent?.Invoke(this, EventArgs.Empty);
+                DepaCancelEvent?.Invoke(this, EventArgs.Empty);
+                openTab(0);
+                Reset();
+
+            };
+
+            btnCancelar2.Click += delegate
+            {
+                UsuarioCancelEvent?.Invoke(this, EventArgs.Empty);
                 openTab(0);
                 Reset();
 
@@ -190,7 +214,7 @@ namespace SistemaControloAlerta.Forms
             sctx = SynchronizationContext.Current;
 
             // Alerts
-            alertTimer = new System.Timers.Timer(10 * seconds); // interval in milliseconds (here - 10 seconds)
+            alertTimer = new System.Timers.Timer(hour * secondsInHour); // interval in milliseconds (here - 10 seconds)
 
             alertTimer.Elapsed += new ElapsedEventHandler((object sender, ElapsedEventArgs e) =>
             {
@@ -249,14 +273,44 @@ namespace SistemaControloAlerta.Forms
             var result = MessageBox.Show("Tem certeza que quer eliminar o item selecionado?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
             {
-                DeleteEvent?.Invoke(this, EventArgs.Empty);
+                DepaDeleteEvent?.Invoke(this, EventArgs.Empty);
             }
         }
 
         private void EditarMenuItem_Click(object sender, EventArgs e)
         {
-            EditEvent?.Invoke(this, EventArgs.Empty);
-            openTab(2);
+
+            if (ValidarAutorizacao()) {
+                DepaEditEvent?.Invoke(this, EventArgs.Empty);
+                openTab(2);
+            }
+        }
+
+        private bool ValidarAutorizacao() {
+
+            string Resultado = FrmEntrar.InputBoxDialog();
+
+            /* defina senha apenas para testar. */
+
+            string password = "mac";
+
+            /* verifica se o resultado é uma string vazia o que indica que foi cancelado. */
+
+            if (Resultado != ""){
+
+                Resultado = Resultado.TrimStart();
+
+                /* Verifica se a senha confere. */
+
+                if (Resultado != password){
+                    MessageBox.Show("Senha Incorreta.");
+                }
+                else{
+                    MessageBox.Show("Senha válida.");
+                    return true;
+                }
+            }
+            return false;
         }
 
 
@@ -355,9 +409,9 @@ namespace SistemaControloAlerta.Forms
         //Structs
         public struct RGBColors
         {
-            public static Color color0 = Color.FromArgb(0, 133, 238);
-            public static Color color1 = Color.FromArgb(255, 255, 0);
-            public static Color color2 = Color.FromArgb(25, 145, 239);
+            public static Color darkBlue = Color.FromArgb(4, 0, 128);
+            public static Color yellow = Color.FromArgb(255, 255, 0);
+            public static Color darkBlue2 = Color.FromArgb(0, 95, 182);
         }
 
         //Methods
@@ -368,7 +422,7 @@ namespace SistemaControloAlerta.Forms
                 DisableButton();
                 //Button
                 currentBtn = (IconButton)senderBtn;
-                currentBtn.BackColor = RGBColors.color2;
+                currentBtn.BackColor = RGBColors.darkBlue2;
                 currentBtn.ForeColor = color;
                 currentBtn.TextAlign = ContentAlignment.MiddleCenter;
                 currentBtn.IconColor = color;
@@ -389,7 +443,7 @@ namespace SistemaControloAlerta.Forms
         {
             if (currentBtn != null)
             {
-                currentBtn.BackColor = RGBColors.color0;
+                currentBtn.BackColor = RGBColors.darkBlue;
                 currentBtn.ForeColor = Color.Gainsboro;
                 currentBtn.TextAlign = ContentAlignment.MiddleLeft;
                 currentBtn.IconColor = Color.Gainsboro;
@@ -410,7 +464,7 @@ namespace SistemaControloAlerta.Forms
             DisableButton();
             leftBorderBtn.Visible = false;
             iconCurrentChildForm.IconChar = IconChar.Home;
-            iconCurrentChildForm.IconColor = RGBColors.color1;
+            iconCurrentChildForm.IconColor = RGBColors.yellow;
             lblTitleChildForm.Text = "Home";
         }
 
@@ -435,20 +489,14 @@ namespace SistemaControloAlerta.Forms
         private void BtnListar_Click(object sender, EventArgs e)
         {
             openTab(1);
-            ActivateButton(sender, RGBColors.color1);
+            ActivateButton(sender, RGBColors.yellow);
         }
 
         private void BtnAdicionar_Click(object sender, EventArgs e)
         {
             openTab(2);
-            ActivateButton(sender, RGBColors.color1);
-            depaPresenter.CleanViewFields();
-        }
-
-        private void BtnAlterarSenha_Click(object sender, EventArgs e)
-        {
-            openTab(1);
-            ActivateButton(sender, RGBColors.color1);
+            ActivateButton(sender, RGBColors.yellow);
+            depaPresenter.DepaCleanViewFields();
         }
 
         private void BtnNotificacoes_Click(object sender, EventArgs e)
@@ -508,7 +556,7 @@ namespace SistemaControloAlerta.Forms
 
         private void menuItem1_Click(object sender, EventArgs e)
         {
-            ActivateButton(sender, RGBColors.color1);
+            ActivateButton(sender, RGBColors.yellow);
             this.Close();
         }
 
@@ -578,6 +626,12 @@ namespace SistemaControloAlerta.Forms
         private void DepaView_FormClosing(object sender, FormClosingEventArgs e)
         {
             
+        }
+
+        private void btnAlterarSenhaAdm_Click(object sender, EventArgs e)
+        {
+            openTab(3);
+            ActivateButton(sender, RGBColors.yellow);
         }
     }
 }

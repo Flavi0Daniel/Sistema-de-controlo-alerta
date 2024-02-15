@@ -1,4 +1,4 @@
-﻿using SistemaControloAlerta.Forms;
+﻿using SistemaControloAlerta._Repositories;
 using SistemaControloAlerta.Models;
 using SistemaControloAlerta.Views;
 using System;
@@ -16,7 +16,8 @@ namespace SistemaControloAlerta.Presenters
     {
         // Fields
         private IDepaView view;
-        private IDepaRepository repository;
+        private IDepaRepository depaRepository;
+        private IusuarioRepository usuarioRepository;
         private BindingSource depaBindingSource;
         private IEnumerable<DepaModel> depaList;
 
@@ -24,18 +25,25 @@ namespace SistemaControloAlerta.Presenters
         private SynchronizationContext sctx;
 
         // Constructor
-        public DepaPresenter(IDepaView view, IDepaRepository repository)
+        public DepaPresenter(IDepaView view)
         {
+
+            String conn = Properties.Settings.Default.DBConnectionString;
+
             depaBindingSource = new BindingSource();
             this.view = view;
-            this.repository = repository;
+            this.depaRepository = new DepaRepository(conn);
+            this.usuarioRepository = new UsuarioRepository(conn);
             // Subscribe event handler methods to view events
-            this.view.SearchEvent += SearchDepa;
-            this.view.AddNewEvent += AddNewDepa;
-            this.view.EditEvent += LoadSelectedDepaToEdit;
-            this.view.DeleteEvent += DeleteSelectedDepa;
-            this.view.SaveEvent += SaveDepa;
-            this.view.CancelEvent += CancelAction;
+            this.view.DepaSearchEvent += DepaSearchDepa;
+            this.view.DepaAddNewEvent += DepaAddNewDepa;
+            this.view.DepaEditEvent += DepaLoadSelectedToEdit;
+            this.view.DepaDeleteEvent += DepaDeleteSelected;
+            this.view.DepaSaveEvent += DepaSave;
+            this.view.DepaCancelEvent += DepaCancelAction;
+
+            this.view.UsuarioSaveEvent += UsuarioSave;
+            this.view.UsuarioCancelEvent += UsuarioCancelAction;
 
             // Set depas bindind source
             this.view.SetDEPAListBindingSource(depaBindingSource);
@@ -49,38 +57,75 @@ namespace SistemaControloAlerta.Presenters
         // Methods
         private void LoadAllDepaList()
         {
-            this.depaList = repository.GetAll();
+            this.depaList = depaRepository.GetAll();
             depaBindingSource.DataSource = depaList;
         }
 
         private int CountAlerts() { 
-            return repository.CountAlerts();
+            return depaRepository.CountAlerts();
         }
 
-        private void SearchDepa(object sender, EventArgs e)
+        private void DepaSearchDepa(object sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrEmpty(this.view.SearchValue);
             if (!emptyValue)
             {
-                depaList = repository.GetByValue(this.view.SearchValue);
+                depaList = depaRepository.GetByValue(this.view.SearchValue);
             }
             else
             {
-                depaList = repository.GetAll();
+                depaList = depaRepository.GetAll();
             }
             depaBindingSource.DataSource = depaList;
         }
 
-        private void CancelAction(object sender, EventArgs e)
+        private void UsuarioCancelAction(object sender, EventArgs e)
         {
-            CleanViewFields();
+            UsuarioCleanViewFields();
         }
 
-        private void SaveDepa(object sender, EventArgs e)
+        private void UsuarioSave(object sender, EventArgs e)
+        {
+            var model = new UsuarioModel();
+
+            model.Id = 1;
+            model.NivelDeAcesso = 1;
+            model.Senha = view.SenhaNova;
+
+            UsuarioModel adm = usuarioRepository.GetById(1);
+
+            try
+            {
+                if (view.SenhaAtual != adm.Senha) {
+                    throw new Exception("Por favor digite a senha atual, essa está errada!");
+                }
+
+                new Common.ModelDataValidation().Validate(model);
+                
+                //Edit model
+                usuarioRepository.Edit(model);
+                view.Message = "Dados editado com sucesso!";
+               
+            }
+            catch (Exception ex)
+            {
+                view.IsSuccessful = false;
+                view.Message = ex.Message;
+            }
+            view.IsSuccessful = true;
+            UsuarioCleanViewFields();
+        }
+
+        private void DepaCancelAction(object sender, EventArgs e)
+        {
+            DepaCleanViewFields();
+        }
+
+        private void DepaSave(object sender, EventArgs e)
         {
             var model = new DepaModel();
 
-            model.Id = Convert.ToInt32(view.Id);
+            model.Id = Convert.ToInt32(view.DepaId);
             model.Assunto = view.Assunto;
             model.Conteudo_despacho = view.Conteudo_despacho;
             model.Area_afectada = view.Area_afectada;
@@ -94,12 +139,12 @@ namespace SistemaControloAlerta.Presenters
                 new Common.ModelDataValidation().Validate(model);
                 if (view.IsEdit)
                 { //Edit model
-                    repository.Edit(model);
+                    depaRepository.Edit(model);
                     view.Message = "Dados editado com sucesso!";
                 }
                 else
                 { // Add new model
-                    repository.Add(model);
+                    depaRepository.Add(model);
                     view.Message = "Dados adicionados com sucesso!";
                 }
             }
@@ -110,12 +155,12 @@ namespace SistemaControloAlerta.Presenters
             }
             view.IsSuccessful = true;
             LoadAllDepaList();
-            CleanViewFields();
+            DepaCleanViewFields();
         }
 
-        public void CleanViewFields()
+        public void DepaCleanViewFields()
         {
-            view.Id = "";
+            view.DepaId = "";
             view.Assunto = "";
             view.Conteudo_despacho = "";
             view.Area_afectada = "";
@@ -125,12 +170,18 @@ namespace SistemaControloAlerta.Presenters
             view.Obs = "";
         }
 
-        private void DeleteSelectedDepa(object sender, EventArgs e)
+        public void UsuarioCleanViewFields()
+        {
+            view.SenhaAtual = "";
+            view.SenhaNova = "";
+        }
+
+        private void DepaDeleteSelected(object sender, EventArgs e)
         {
             try
             {
                 var depa = (DepaModel)depaBindingSource.Current;
-                repository.Delete(depa.Id);
+                depaRepository.Delete(depa.Id);
                 view.IsSuccessful = true;
                 view.Message = "Dados eliminado com sucesso!";
                 LoadAllDepaList();
@@ -141,10 +192,10 @@ namespace SistemaControloAlerta.Presenters
                 view.Message = "Ocorreu um erro, não é possível deletar!";
             }
         }
-            private void LoadSelectedDepaToEdit(object sender, EventArgs e)
+            private void DepaLoadSelectedToEdit(object sender, EventArgs e)
         {
             var depa = (DepaModel)depaBindingSource.Current;
-            view.Id = depa.Id.ToString();
+            view.DepaId = depa.Id.ToString();
             view.Assunto = depa.Assunto;
             view.Conteudo_despacho = depa.Conteudo_despacho;
             view.Area_afectada = depa.Area_afectada;
@@ -155,7 +206,7 @@ namespace SistemaControloAlerta.Presenters
             view.IsEdit = true;
         }
 
-        private void AddNewDepa(object sender, EventArgs e)
+        private void DepaAddNewDepa(object sender, EventArgs e)
         {
             view.IsEdit = false;
         }

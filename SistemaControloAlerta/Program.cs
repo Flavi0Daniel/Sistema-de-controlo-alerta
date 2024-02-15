@@ -6,8 +6,8 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SistemaControloAlerta.Forms;
 using System.Security.Principal;
+using SistemaControloAlerta.Views;
 
 namespace SistemaControloAlerta
 {
@@ -18,7 +18,6 @@ namespace SistemaControloAlerta
         /// </summary>
 
         private const string appName = "MUTEX_DEPA";
-        private static bool _firstApplicationInstance;
         private static Mutex _mutex = new Mutex(false, appName);
         [STAThread]
         static void Main()
