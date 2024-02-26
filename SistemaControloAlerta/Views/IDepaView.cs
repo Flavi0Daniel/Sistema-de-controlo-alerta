@@ -39,10 +39,14 @@ namespace SistemaControloAlerta.Views
         event EventHandler UsuarioCancelEvent;
         event EventHandler UsuarioSaveEvent;
 
+        event EventHandler OnCmbNotificationSelectionChangeCommittedEvent;
+
         //Methods
         void SetDEPAListBindingSource(BindingSource depaList);
 
-        void OnCountAlerts(Func<int> alerts, SynchronizationContext synchronizationContext, System.Timers.Timer timer);
+        void OnCmbNotificationSavedItem(Func<int> time);
+
+        void OnCountAlerts(Func<int> alerts, Func<int> time, SynchronizationContext synchronizationContext, System.Timers.Timer timer);
 
         void OnClose();
     }

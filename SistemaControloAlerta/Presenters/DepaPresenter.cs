@@ -31,6 +31,7 @@ namespace SistemaControloAlerta.Presenters
             String conn = Properties.Settings.Default.DBConnectionString;
 
             depaBindingSource = new BindingSource();
+
             this.view = view;
             this.depaRepository = new DepaRepository(conn);
             this.usuarioRepository = new UsuarioRepository(conn);
@@ -45,10 +46,14 @@ namespace SistemaControloAlerta.Presenters
             this.view.UsuarioSaveEvent += UsuarioSave;
             this.view.UsuarioCancelEvent += UsuarioCancelAction;
 
+            this.view.OnCmbNotificationSelectionChangeCommittedEvent += OnCmbNotificationSelectionChangeCommitted;
+
             // Set depas bindind source
             this.view.SetDEPAListBindingSource(depaBindingSource);
 
-            this.view.OnCountAlerts(CountAlerts, sctx, alertTimer);
+            this.view.OnCmbNotificationSavedItem(GetNotificationTime);
+
+            this.view.OnCountAlerts(CountAlerts,GetNotificationTime, sctx, alertTimer);
 
             // Load depa list view
             LoadAllDepaList();
@@ -63,6 +68,10 @@ namespace SistemaControloAlerta.Presenters
 
         private int CountAlerts() { 
             return depaRepository.CountAlerts();
+        }
+
+        private int GetNotificationTime() { 
+            return depaRepository.getNotificationTime();
         }
 
         private void DepaSearchDepa(object sender, EventArgs e)
@@ -158,6 +167,19 @@ namespace SistemaControloAlerta.Presenters
             DepaCleanViewFields();
         }
 
+        private void OnCmbNotificationSelectionChangeCommitted(object sender, EventArgs e)
+        {
+            // Salvar a hora selecionada para avisar sobre os vencimentos!
+
+            ComboBox cmb = sender as ComboBox;
+
+            string key = ((KeyValuePair<string, int>)cmb.SelectedItem).Key;
+            int value = ((KeyValuePair<string, int>)cmb.SelectedItem).Value;
+
+            depaRepository.setNotificationTime(value);
+
+        }
+
         public void DepaCleanViewFields()
         {
             view.DepaId = "";
@@ -209,6 +231,10 @@ namespace SistemaControloAlerta.Presenters
         private void DepaAddNewDepa(object sender, EventArgs e)
         {
             view.IsEdit = false;
+        }
+
+        public string getAdminPassword() {
+            return usuarioRepository.GetById(1).Senha;
         }
     }
 }

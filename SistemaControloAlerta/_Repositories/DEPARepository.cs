@@ -198,6 +198,39 @@ namespace SistemaControloAlerta._Repositories
             return depaList;
         }
 
+        public int getNotificationTime() {
+
+            int notificationTime = 1;
+
+            using (var connection = new SqlConnection(connectionString))
+            using (var command = connection.CreateCommand())
+            {
+                string query = @"SELECT * FROM notificacoes WHERE id = 1";
+                connection.Open();
+                command.CommandText = query;
+                using (var reader = command.ExecuteReader())
+                {
+                    reader.Read();
+                    notificationTime = (int)reader[1];
+                }
+            }
+
+            return notificationTime;
+        }
+
+        public void setNotificationTime(int time) {
+
+            using (var connection = new SqlConnection(connectionString))
+            using (var command = connection.CreateCommand())
+            {
+                string query = "UPDATE notificacoes SET tempo=@tempo WHERE id=1";
+                connection.Open();
+                command.CommandText = query;
+                command.Parameters.Add("@tempo", SqlDbType.Int).Value = time;
+                command.ExecuteNonQuery();
+            }
+        }
+
         public int CountAlerts()
         {
             var depaList = new List<DepaModel>();

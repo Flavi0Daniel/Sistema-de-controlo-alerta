@@ -13,6 +13,10 @@ namespace SistemaControloAlerta.Models
         void Delete(int id);
         IEnumerable<DepaModel> GetAll();
         int CountAlerts();
+
+        void setNotificationTime(int time);
+
+        int getNotificationTime();
         IEnumerable<DepaModel> GetAllNotifications();
         IEnumerable<DepaModel> GetByValue(string value); // Searchs
     }
