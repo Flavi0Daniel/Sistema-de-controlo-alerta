@@ -2,14 +2,17 @@
 using SistemaControloAlerta._Repositories;
 using SistemaControloAlerta.Presenters;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.IO.Pipes;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security.AccessControl;
 using System.Security.Principal;
 using System.Threading;
 using System.Timers;
+using System.Windows.Controls;
 using System.Windows.Forms;
 
 namespace SistemaControloAlerta.Views
@@ -19,7 +22,7 @@ namespace SistemaControloAlerta.Views
 
         // Atributes
         private IconButton currentBtn;
-        private Panel leftBorderBtn;
+        private System.Windows.Forms.Panel leftBorderBtn;
 
         // Atributes
         private string message;
@@ -57,8 +60,11 @@ namespace SistemaControloAlerta.Views
         public event EventHandler UsuarioSaveEvent;
         public event EventHandler UsuarioCancelEvent;
 
+        public event EventHandler OnCmbNotificationSelectionChangeCommittedEvent;
+
         //Others
-        private const int secondsInHour = 3600000;
+        private const int milisecondsInHour = 3600000;
+        private const int secondsInMinute = 60000;
         private const int hour = 1;
         private bool isHide = false;
 
@@ -201,6 +207,8 @@ namespace SistemaControloAlerta.Views
 
             };
 
+            cmbNotificacoes.SelectionChangeCommitted += OnCmbNotificationSelectionChangeCommittedEvent;
+
         }
 
         // DEPA Methods
@@ -209,16 +217,26 @@ namespace SistemaControloAlerta.Views
             DgvDEPA.DataSource = depaList;
         }
 
-        public void OnCountAlerts(Func<int> alerts, SynchronizationContext sctx, System.Timers.Timer alertTimer)
+        public void OnCountAlerts(Func<int> alerts, Func<int> time, SynchronizationContext sctx, System.Timers.Timer alertTimer)
         {
             sctx = SynchronizationContext.Current;
 
+            int currentTime = time.Invoke();
+
             // Alerts
-            alertTimer = new System.Timers.Timer(hour * secondsInHour); // interval in milliseconds (here - 10 seconds)
+            alertTimer = new System.Timers.Timer(currentTime * milisecondsInHour);
 
             alertTimer.Elapsed += new ElapsedEventHandler((object sender, ElapsedEventArgs e) =>
             {
-                if (alerts.Invoke() > 0 && isHide)
+
+                if (currentTime != time.Invoke()) { 
+                    currentTime = time.Invoke();
+                    alertTimer.Interval = currentTime * milisecondsInHour;
+                    alertTimer.Stop();
+                    alertTimer.Start();
+                }
+
+                if (alerts.Invoke() > 0)
                 {
                     // Schedule UI update code on the main UI thread
                     SynchronizationContext.SetSynchronizationContext(sctx);
@@ -231,6 +249,26 @@ namespace SistemaControloAlerta.Views
             }); // handler - what to do when time elaps
 
             alertTimer.Start();
+        }
+
+        public void OnCmbNotificationSavedItem(Func<int> time) {
+            // init combobox
+
+            Dictionary<string, int> comboSource = new Dictionary<string, int>();
+
+            for (int i = 1; i <= 24; i++)
+            {
+                comboSource.Add(i + " Hora", i);
+            }
+
+            cmbNotificacoes.DataSource = new BindingSource(comboSource, null);
+
+            cmbNotificacoes.DisplayMember = "Key";
+            cmbNotificacoes.ValueMember = "Value";
+
+            int savedValue = comboSource.FirstOrDefault(x => x.Value == time.Invoke()).Value;
+
+            cmbNotificacoes.SelectedValue = savedValue;
         }
 
         public void OnClose()
@@ -290,9 +328,9 @@ namespace SistemaControloAlerta.Views
 
             string Resultado = FrmEntrar.InputBoxDialog();
 
-            /* defina senha apenas para testar. */
+            /* pegar a senha. */
 
-            string password = "mac";
+            string password = depaPresenter.getAdminPassword();
 
             /* verifica se o resultado é uma string vazia o que indica que foi cancelado. */
 
@@ -501,10 +539,8 @@ namespace SistemaControloAlerta.Views
 
         private void BtnNotificacoes_Click(object sender, EventArgs e)
         {
-            // openTab(4);
-            // ActivateButton(sender, RGBColors.color1);
-            Alert("Há vencimentos!", Form_Alert.enmType.Warning);
-
+            openTab(4);
+            ActivateButton(sender, RGBColors.yellow);
         }
 
         private void BtnHome_Click(object sender, EventArgs e)
@@ -556,7 +592,7 @@ namespace SistemaControloAlerta.Views
 
         private void menuItem1_Click(object sender, EventArgs e)
         {
-            ActivateButton(sender, RGBColors.yellow);
+            // ActivateButton(sender, RGBColors.yellow);
             this.Close();
         }
 
@@ -632,6 +668,11 @@ namespace SistemaControloAlerta.Views
         {
             openTab(3);
             ActivateButton(sender, RGBColors.yellow);
+        }
+
+        private void cmbNotificacoes_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
         }
     }
 }
