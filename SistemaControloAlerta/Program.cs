@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Security.Principal;
 using SistemaControloAlerta.Views;
+using System.Windows.Shapes;
 
 namespace SistemaControloAlerta
 {
@@ -22,6 +23,8 @@ namespace SistemaControloAlerta
         [STAThread]
         static void Main()
         {
+
+            AppDomain.CurrentDomain.SetData("DataDirectory", Application.UserAppDataPath);
 
             // espera por 3 seconds ate ter certeza de que não há outra instância sendo executada
             if (!_mutex.WaitOne(TimeSpan.FromSeconds(3), false))
@@ -38,6 +41,7 @@ namespace SistemaControloAlerta
             else {
                 try
                 {
+                    CheckDatabase();
                     Application.EnableVisualStyles();
                     Application.SetCompatibleTextRenderingDefault(false);
                     Application.Run(new DepaView());
@@ -47,6 +51,43 @@ namespace SistemaControloAlerta
                     _mutex.ReleaseMutex();
                 }
             }
+        }
+
+        static void CheckDatabase() {
+
+            string dbPath = System.IO.Path.Combine(Application.UserAppDataPath, "DB.mdf");
+            string dbLogPath = System.IO.Path.Combine(Application.UserAppDataPath, "DB_log.mdf");
+
+            bool dbExists = File.Exists(dbPath);
+            bool dbLogExists = File.Exists(dbLogPath);
+
+            if (!dbExists && !dbLogExists) {
+
+                string sourceDbFolder = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location), "DB");
+
+                string sourceDbFile = System.IO.Path.Combine(sourceDbFolder, "DB.mdf");
+
+                string sourceDbLogFile = System.IO.Path.Combine(sourceDbFolder, "DB_log.mdf");
+
+                try
+                {
+                    File.Copy(sourceDbFile, dbPath, true);
+                }
+                catch (IOException iox)
+                {
+                    Console.WriteLine(iox.Message);
+                }
+
+                try
+                {
+                    File.Copy(sourceDbLogFile, dbLogPath, true);
+                }
+                catch (IOException iox)
+                {
+                    Console.WriteLine(iox.Message);
+                }
+            }
+
         }
 
         static void ActivateExistingInstance()

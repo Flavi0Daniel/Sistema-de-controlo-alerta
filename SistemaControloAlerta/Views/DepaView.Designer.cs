@@ -30,23 +30,23 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DepaView));
-            this.PanelMenu = new Guna.UI2.WinForms.Guna2Panel();
+            this.PanelMenu = new System.Windows.Forms.Panel();
             this.btnNotificacoes = new FontAwesome.Sharp.IconButton();
             this.btnAlterarSenhaAdm = new FontAwesome.Sharp.IconButton();
             this.BtnAdicionar = new FontAwesome.Sharp.IconButton();
             this.BtnListar = new FontAwesome.Sharp.IconButton();
-            this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
-            this.BtnHome = new Guna.UI2.WinForms.Guna2PictureBox();
-            this.PanelTitlebar = new Guna.UI2.WinForms.Guna2Panel();
+            this.guna2Panel1 = new System.Windows.Forms.Panel();
+            this.BtnHome = new System.Windows.Forms.PictureBox();
+            this.PanelTitlebar = new System.Windows.Forms.Panel();
             this.BtnMinimizar = new FontAwesome.Sharp.IconButton();
             this.BtnMaximizar = new FontAwesome.Sharp.IconButton();
             this.BtnFechar = new FontAwesome.Sharp.IconButton();
-            this.lblTitleChildForm = new Guna.UI.WinForms.GunaLabel();
+            this.lblTitleChildForm = new System.Windows.Forms.Label();
             this.iconCurrentChildForm = new FontAwesome.Sharp.IconPictureBox();
-            this.panelDesktop = new Guna.UI2.WinForms.Guna2Panel();
+            this.panelDesktop = new System.Windows.Forms.Panel();
             this.tcOpcoes = new System.Windows.Forms.TabControl();
             this.tbHome = new System.Windows.Forms.TabPage();
-            this.LblDesktop = new Guna.UI.WinForms.GunaLabel();
+            this.LblDesktop = new System.Windows.Forms.Label();
             this.tpListar = new System.Windows.Forms.TabPage();
             this.DgvDEPA = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -71,20 +71,20 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.btnCancelar = new ePOSOne.btnProduct.Button_WOC();
+            this.btnSalvar = new ePOSOne.btnProduct.Button_WOC();
             this.tbAlterarSenhaAdm = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnCancelar2 = new ePOSOne.btnProduct.Button_WOC();
+            this.btnAlterar = new ePOSOne.btnProduct.Button_WOC();
             this.txtNovaSenha = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.txtSenhaActual = new System.Windows.Forms.TextBox();
             this.tbNotificacoes = new System.Windows.Forms.TabPage();
             this.label11 = new System.Windows.Forms.Label();
-            this.cmbNotificacoes = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.cmbNotificacoes = new System.Windows.Forms.ComboBox();
             this.ntfIcon = new System.Windows.Forms.NotifyIcon(this.components);
-            this.btnCancelar = new ePOSOne.btnProduct.Button_WOC();
-            this.btnSalvar = new ePOSOne.btnProduct.Button_WOC();
-            this.btnCancelar2 = new ePOSOne.btnProduct.Button_WOC();
-            this.btnAlterar = new ePOSOne.btnProduct.Button_WOC();
             this.PanelMenu.SuspendLayout();
             this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BtnHome)).BeginInit();
@@ -114,7 +114,6 @@
             this.PanelMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.PanelMenu.Location = new System.Drawing.Point(3, 3);
             this.PanelMenu.Name = "PanelMenu";
-            this.PanelMenu.ShadowDecoration.Parent = this.PanelMenu;
             this.PanelMenu.Size = new System.Drawing.Size(220, 954);
             this.PanelMenu.TabIndex = 0;
             // 
@@ -220,7 +219,6 @@
             this.guna2Panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.guna2Panel1.Location = new System.Drawing.Point(0, 0);
             this.guna2Panel1.Name = "guna2Panel1";
-            this.guna2Panel1.ShadowDecoration.Parent = this.guna2Panel1;
             this.guna2Panel1.Size = new System.Drawing.Size(220, 140);
             this.guna2Panel1.TabIndex = 0;
             // 
@@ -230,7 +228,6 @@
             this.BtnHome.Image = global::SistemaControloAlerta.Properties.Resources.WhatsApp_Image_2024_01_04_at_18_18_51;
             this.BtnHome.Location = new System.Drawing.Point(54, 12);
             this.BtnHome.Name = "BtnHome";
-            this.BtnHome.ShadowDecoration.Parent = this.BtnHome;
             this.BtnHome.Size = new System.Drawing.Size(113, 107);
             this.BtnHome.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.BtnHome.TabIndex = 0;
@@ -248,7 +245,6 @@
             this.PanelTitlebar.Dock = System.Windows.Forms.DockStyle.Top;
             this.PanelTitlebar.Location = new System.Drawing.Point(223, 3);
             this.PanelTitlebar.Name = "PanelTitlebar";
-            this.PanelTitlebar.ShadowDecoration.Parent = this.PanelTitlebar;
             this.PanelTitlebar.Size = new System.Drawing.Size(1015, 75);
             this.PanelTitlebar.TabIndex = 1;
             this.PanelTitlebar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PanelTitlebar_MouseDown);
@@ -332,7 +328,6 @@
             this.panelDesktop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelDesktop.Location = new System.Drawing.Point(223, 78);
             this.panelDesktop.Name = "panelDesktop";
-            this.panelDesktop.ShadowDecoration.Parent = this.panelDesktop;
             this.panelDesktop.Size = new System.Drawing.Size(1015, 879);
             this.panelDesktop.TabIndex = 2;
             // 
@@ -646,6 +641,46 @@
             this.label2.TabIndex = 25;
             this.label2.Text = "ASSUNTO";
             // 
+            // btnCancelar
+            // 
+            this.btnCancelar.BorderColor = System.Drawing.Color.Yellow;
+            this.btnCancelar.ButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))));
+            this.btnCancelar.FlatAppearance.BorderSize = 0;
+            this.btnCancelar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))));
+            this.btnCancelar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))));
+            this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancelar.Location = new System.Drawing.Point(716, 382);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.OnHoverBorderColor = System.Drawing.Color.Gray;
+            this.btnCancelar.OnHoverButtonColor = System.Drawing.Color.Yellow;
+            this.btnCancelar.OnHoverTextColor = System.Drawing.Color.Gray;
+            this.btnCancelar.Size = new System.Drawing.Size(187, 71);
+            this.btnCancelar.TabIndex = 38;
+            this.btnCancelar.Text = "CANCELAR";
+            this.btnCancelar.TextColor = System.Drawing.Color.White;
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            // 
+            // btnSalvar
+            // 
+            this.btnSalvar.BorderColor = System.Drawing.Color.Yellow;
+            this.btnSalvar.ButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))));
+            this.btnSalvar.FlatAppearance.BorderSize = 0;
+            this.btnSalvar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))));
+            this.btnSalvar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))));
+            this.btnSalvar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSalvar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSalvar.Location = new System.Drawing.Point(716, 276);
+            this.btnSalvar.Name = "btnSalvar";
+            this.btnSalvar.OnHoverBorderColor = System.Drawing.Color.Gray;
+            this.btnSalvar.OnHoverButtonColor = System.Drawing.Color.Yellow;
+            this.btnSalvar.OnHoverTextColor = System.Drawing.Color.Gray;
+            this.btnSalvar.Size = new System.Drawing.Size(187, 71);
+            this.btnSalvar.TabIndex = 35;
+            this.btnSalvar.Text = "SALVAR";
+            this.btnSalvar.TextColor = System.Drawing.Color.White;
+            this.btnSalvar.UseVisualStyleBackColor = true;
+            // 
             // tbAlterarSenhaAdm
             // 
             this.tbAlterarSenhaAdm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))));
@@ -672,6 +707,50 @@
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Alterar senha";
+            // 
+            // btnCancelar2
+            // 
+            this.btnCancelar2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancelar2.BorderColor = System.Drawing.Color.Yellow;
+            this.btnCancelar2.ButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))));
+            this.btnCancelar2.FlatAppearance.BorderSize = 0;
+            this.btnCancelar2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))));
+            this.btnCancelar2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))));
+            this.btnCancelar2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancelar2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancelar2.Location = new System.Drawing.Point(224, 458);
+            this.btnCancelar2.Name = "btnCancelar2";
+            this.btnCancelar2.OnHoverBorderColor = System.Drawing.Color.Gray;
+            this.btnCancelar2.OnHoverButtonColor = System.Drawing.Color.Yellow;
+            this.btnCancelar2.OnHoverTextColor = System.Drawing.Color.Gray;
+            this.btnCancelar2.Size = new System.Drawing.Size(187, 71);
+            this.btnCancelar2.TabIndex = 37;
+            this.btnCancelar2.Text = "CANCELAR";
+            this.btnCancelar2.TextColor = System.Drawing.Color.White;
+            this.btnCancelar2.UseVisualStyleBackColor = true;
+            // 
+            // btnAlterar
+            // 
+            this.btnAlterar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAlterar.BorderColor = System.Drawing.Color.Yellow;
+            this.btnAlterar.ButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))));
+            this.btnAlterar.FlatAppearance.BorderSize = 0;
+            this.btnAlterar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))));
+            this.btnAlterar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))));
+            this.btnAlterar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAlterar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAlterar.Location = new System.Drawing.Point(224, 325);
+            this.btnAlterar.Name = "btnAlterar";
+            this.btnAlterar.OnHoverBorderColor = System.Drawing.Color.Gray;
+            this.btnAlterar.OnHoverButtonColor = System.Drawing.Color.Yellow;
+            this.btnAlterar.OnHoverTextColor = System.Drawing.Color.Gray;
+            this.btnAlterar.Size = new System.Drawing.Size(187, 71);
+            this.btnAlterar.TabIndex = 36;
+            this.btnAlterar.Text = "ALTERAR";
+            this.btnAlterar.TextColor = System.Drawing.Color.White;
+            this.btnAlterar.UseVisualStyleBackColor = true;
             // 
             // txtNovaSenha
             // 
@@ -745,21 +824,12 @@
             // 
             // cmbNotificacoes
             // 
-            this.cmbNotificacoes.BackColor = System.Drawing.Color.Transparent;
-            this.cmbNotificacoes.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbNotificacoes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbNotificacoes.FocusedColor = System.Drawing.Color.Empty;
-            this.cmbNotificacoes.FocusedState.Parent = this.cmbNotificacoes;
-            this.cmbNotificacoes.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.cmbNotificacoes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
+            this.cmbNotificacoes.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbNotificacoes.FormattingEnabled = true;
-            this.cmbNotificacoes.HoverState.Parent = this.cmbNotificacoes;
-            this.cmbNotificacoes.ItemHeight = 30;
-            this.cmbNotificacoes.ItemsAppearance.Parent = this.cmbNotificacoes;
             this.cmbNotificacoes.Location = new System.Drawing.Point(38, 75);
             this.cmbNotificacoes.Name = "cmbNotificacoes";
-            this.cmbNotificacoes.ShadowDecoration.Parent = this.cmbNotificacoes;
-            this.cmbNotificacoes.Size = new System.Drawing.Size(386, 36);
+            this.cmbNotificacoes.Size = new System.Drawing.Size(386, 28);
             this.cmbNotificacoes.TabIndex = 0;
             this.cmbNotificacoes.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbNotificacoes_KeyPress);
             // 
@@ -771,90 +841,6 @@
             this.ntfIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("ntfIcon.Icon")));
             this.ntfIcon.Text = "DEPA";
             this.ntfIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.ntfIcon_MouseDoubleClick);
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.BorderColor = System.Drawing.Color.Yellow;
-            this.btnCancelar.ButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))));
-            this.btnCancelar.FlatAppearance.BorderSize = 0;
-            this.btnCancelar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))));
-            this.btnCancelar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))));
-            this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelar.Location = new System.Drawing.Point(716, 382);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.OnHoverBorderColor = System.Drawing.Color.Gray;
-            this.btnCancelar.OnHoverButtonColor = System.Drawing.Color.Yellow;
-            this.btnCancelar.OnHoverTextColor = System.Drawing.Color.Gray;
-            this.btnCancelar.Size = new System.Drawing.Size(187, 71);
-            this.btnCancelar.TabIndex = 38;
-            this.btnCancelar.Text = "CANCELAR";
-            this.btnCancelar.TextColor = System.Drawing.Color.White;
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            // 
-            // btnSalvar
-            // 
-            this.btnSalvar.BorderColor = System.Drawing.Color.Yellow;
-            this.btnSalvar.ButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))));
-            this.btnSalvar.FlatAppearance.BorderSize = 0;
-            this.btnSalvar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))));
-            this.btnSalvar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))));
-            this.btnSalvar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSalvar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSalvar.Location = new System.Drawing.Point(716, 276);
-            this.btnSalvar.Name = "btnSalvar";
-            this.btnSalvar.OnHoverBorderColor = System.Drawing.Color.Gray;
-            this.btnSalvar.OnHoverButtonColor = System.Drawing.Color.Yellow;
-            this.btnSalvar.OnHoverTextColor = System.Drawing.Color.Gray;
-            this.btnSalvar.Size = new System.Drawing.Size(187, 71);
-            this.btnSalvar.TabIndex = 35;
-            this.btnSalvar.Text = "SALVAR";
-            this.btnSalvar.TextColor = System.Drawing.Color.White;
-            this.btnSalvar.UseVisualStyleBackColor = true;
-            // 
-            // btnCancelar2
-            // 
-            this.btnCancelar2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancelar2.BorderColor = System.Drawing.Color.Yellow;
-            this.btnCancelar2.ButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))));
-            this.btnCancelar2.FlatAppearance.BorderSize = 0;
-            this.btnCancelar2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))));
-            this.btnCancelar2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))));
-            this.btnCancelar2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancelar2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelar2.Location = new System.Drawing.Point(224, 458);
-            this.btnCancelar2.Name = "btnCancelar2";
-            this.btnCancelar2.OnHoverBorderColor = System.Drawing.Color.Gray;
-            this.btnCancelar2.OnHoverButtonColor = System.Drawing.Color.Yellow;
-            this.btnCancelar2.OnHoverTextColor = System.Drawing.Color.Gray;
-            this.btnCancelar2.Size = new System.Drawing.Size(187, 71);
-            this.btnCancelar2.TabIndex = 37;
-            this.btnCancelar2.Text = "CANCELAR";
-            this.btnCancelar2.TextColor = System.Drawing.Color.White;
-            this.btnCancelar2.UseVisualStyleBackColor = true;
-            // 
-            // btnAlterar
-            // 
-            this.btnAlterar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAlterar.BorderColor = System.Drawing.Color.Yellow;
-            this.btnAlterar.ButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))));
-            this.btnAlterar.FlatAppearance.BorderSize = 0;
-            this.btnAlterar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))));
-            this.btnAlterar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))));
-            this.btnAlterar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAlterar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAlterar.Location = new System.Drawing.Point(224, 325);
-            this.btnAlterar.Name = "btnAlterar";
-            this.btnAlterar.OnHoverBorderColor = System.Drawing.Color.Gray;
-            this.btnAlterar.OnHoverButtonColor = System.Drawing.Color.Yellow;
-            this.btnAlterar.OnHoverTextColor = System.Drawing.Color.Gray;
-            this.btnAlterar.Size = new System.Drawing.Size(187, 71);
-            this.btnAlterar.TabIndex = 36;
-            this.btnAlterar.Text = "ALTERAR";
-            this.btnAlterar.TextColor = System.Drawing.Color.White;
-            this.btnAlterar.UseVisualStyleBackColor = true;
             // 
             // DepaView
             // 
@@ -901,22 +887,22 @@
 
         #endregion
 
-        private Guna.UI2.WinForms.Guna2Panel PanelMenu;
-        private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
+        private System.Windows.Forms.Panel PanelMenu;
+        private System.Windows.Forms.Panel guna2Panel1;
         private FontAwesome.Sharp.IconButton BtnListar;
         private FontAwesome.Sharp.IconButton BtnAdicionar;
-        private Guna.UI2.WinForms.Guna2PictureBox BtnHome;
-        private Guna.UI2.WinForms.Guna2Panel PanelTitlebar;
+        private System.Windows.Forms.PictureBox BtnHome;
+        private System.Windows.Forms.Panel PanelTitlebar;
         private FontAwesome.Sharp.IconPictureBox iconCurrentChildForm;
-        private Guna.UI.WinForms.GunaLabel lblTitleChildForm;
-        private Guna.UI2.WinForms.Guna2Panel panelDesktop;
+        private System.Windows.Forms.Label lblTitleChildForm;
+        private System.Windows.Forms.Panel panelDesktop;
         private FontAwesome.Sharp.IconButton BtnFechar;
         private FontAwesome.Sharp.IconButton BtnMinimizar;
         private FontAwesome.Sharp.IconButton BtnMaximizar;
         private FontAwesome.Sharp.IconButton btnAlterarSenhaAdm;
         private System.Windows.Forms.TabControl tcOpcoes;
         private System.Windows.Forms.TabPage tbHome;
-        private Guna.UI.WinForms.GunaLabel LblDesktop;
+        private System.Windows.Forms.Label LblDesktop;
         private System.Windows.Forms.TabPage tpListar;
         private System.Windows.Forms.DataGridView DgvDEPA;
         private System.Windows.Forms.Panel panel2;
@@ -955,6 +941,6 @@
         private FontAwesome.Sharp.IconButton btnNotificacoes;
         private System.Windows.Forms.TabPage tbNotificacoes;
         private System.Windows.Forms.Label label11;
-        private Guna.UI2.WinForms.Guna2ComboBox cmbNotificacoes;
+        private System.Windows.Forms.ComboBox cmbNotificacoes;
     }
 }
