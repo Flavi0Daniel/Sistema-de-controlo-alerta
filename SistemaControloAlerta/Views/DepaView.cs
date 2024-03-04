@@ -311,7 +311,10 @@ namespace SistemaControloAlerta.Views
             var result = MessageBox.Show("Tem certeza que quer eliminar o item selecionado?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
             {
-                DepaDeleteEvent?.Invoke(this, EventArgs.Empty);
+                if (ValidarAutorizacao())
+                {
+                    DepaDeleteEvent?.Invoke(this, EventArgs.Empty);
+                }
             }
         }
 
@@ -326,7 +329,7 @@ namespace SistemaControloAlerta.Views
 
         private bool ValidarAutorizacao() {
 
-            string Resultado = FrmEntrar.InputBoxDialog();
+            string resultado = FrmEntrar.InputBoxDialog();
 
             /* pegar a senha. */
 
@@ -334,13 +337,16 @@ namespace SistemaControloAlerta.Views
 
             /* verifica se o resultado é uma string vazia o que indica que foi cancelado. */
 
-            if (Resultado != ""){
+            if (resultado != ""){
 
-                Resultado = Resultado.TrimStart();
+                if (!string.IsNullOrEmpty(resultado))
+                {
+                    resultado = resultado.TrimStart();
+                }
 
                 /* Verifica se a senha confere. */
 
-                if (Resultado != password){
+                if (resultado != password){
                     MessageBox.Show("Senha Incorreta.");
                 }
                 else{

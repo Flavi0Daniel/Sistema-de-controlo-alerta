@@ -180,5 +180,10 @@ namespace SistemaControloAlerta
                 return s;
 
         }
+
+        private void FrmEntrar_Load(object sender, EventArgs e)
+        {
+            CmbNivelAcesso.SelectedIndex = 0;
+        }
     }
 }

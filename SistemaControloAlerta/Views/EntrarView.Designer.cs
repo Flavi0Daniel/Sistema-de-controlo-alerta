@@ -144,7 +144,8 @@
             // guna2ShadowPanel1
             // 
             this.guna2ShadowPanel1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.guna2ShadowPanel1.BackColor = System.Drawing.Color.Transparent;
+            this.guna2ShadowPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))));
+            this.guna2ShadowPanel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.guna2ShadowPanel1.Controls.Add(this.guna2Panel3);
             this.guna2ShadowPanel1.Controls.Add(this.guna2Panel4);
             this.guna2ShadowPanel1.Location = new System.Drawing.Point(144, 53);
@@ -160,25 +161,19 @@
             this.guna2Panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.guna2Panel3.Location = new System.Drawing.Point(50, 50);
             this.guna2Panel3.Name = "guna2Panel3";
-            this.guna2Panel3.Size = new System.Drawing.Size(418, 78);
+            this.guna2Panel3.Size = new System.Drawing.Size(414, 78);
             this.guna2Panel3.TabIndex = 15;
             // 
             // CmbNivelAcesso
             // 
-            this.CmbNivelAcesso.BackColor = System.Drawing.Color.Transparent;
             this.CmbNivelAcesso.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.CmbNivelAcesso.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.CmbNivelAcesso.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CmbNivelAcesso.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.CmbNivelAcesso.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
-            this.CmbNivelAcesso.FormattingEnabled = true;
-            this.CmbNivelAcesso.ItemHeight = 30;
+            this.CmbNivelAcesso.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CmbNivelAcesso.Items.AddRange(new object[] {
             "Administrador"});
-            this.CmbNivelAcesso.Location = new System.Drawing.Point(0, 42);
+            this.CmbNivelAcesso.Location = new System.Drawing.Point(0, 50);
             this.CmbNivelAcesso.Name = "CmbNivelAcesso";
-            this.CmbNivelAcesso.Size = new System.Drawing.Size(418, 36);
-            this.CmbNivelAcesso.TabIndex = 11;
+            this.CmbNivelAcesso.Size = new System.Drawing.Size(414, 28);
+            this.CmbNivelAcesso.TabIndex = 0;
             // 
             // gunaLabel3
             // 
@@ -197,21 +192,20 @@
             this.guna2Panel4.Controls.Add(this.TxtSenha);
             this.guna2Panel4.Controls.Add(this.gunaLabel4);
             this.guna2Panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.guna2Panel4.Location = new System.Drawing.Point(50, 155);
+            this.guna2Panel4.Location = new System.Drawing.Point(50, 151);
             this.guna2Panel4.Name = "guna2Panel4";
-            this.guna2Panel4.Size = new System.Drawing.Size(418, 83);
+            this.guna2Panel4.Size = new System.Drawing.Size(414, 83);
             this.guna2Panel4.TabIndex = 16;
             // 
             // TxtSenha
             // 
             this.TxtSenha.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.TxtSenha.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.TxtSenha.Location = new System.Drawing.Point(0, 37);
-            this.TxtSenha.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TxtSenha.Location = new System.Drawing.Point(0, 61);
+            this.TxtSenha.Margin = new System.Windows.Forms.Padding(4);
             this.TxtSenha.Name = "TxtSenha";
             this.TxtSenha.PasswordChar = '*';
-            this.TxtSenha.SelectedText = "";
-            this.TxtSenha.Size = new System.Drawing.Size(418, 46);
+            this.TxtSenha.Size = new System.Drawing.Size(414, 22);
             this.TxtSenha.TabIndex = 13;
             // 
             // gunaLabel4
@@ -283,22 +277,21 @@
             // 
             this.guna2TextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.guna2TextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))));
+            this.guna2TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.guna2TextBox1.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.guna2TextBox1.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.guna2TextBox1.Text = "DIRECÇÃO DE INFORMAÇÕES POLICIAIS\r\n\r\nDEPARTAMENTO DE ESTUDO PLANEAMENTO E ANÁLISE" +
-    "\r\n\r\nSECÇÃO DE PLANEAMENTO E CONTROLO";
             this.guna2TextBox1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.guna2TextBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(249)))), ((int)(((byte)(246)))));
             this.guna2TextBox1.Location = new System.Drawing.Point(3, 178);
             this.guna2TextBox1.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.guna2TextBox1.Multiline = true;
             this.guna2TextBox1.Name = "guna2TextBox1";
-            this.guna2TextBox1.PasswordChar = '\0';
             this.guna2TextBox1.ReadOnly = true;
-            this.guna2TextBox1.SelectedText = "";
-            this.guna2TextBox1.SelectionStart = 117;
             this.guna2TextBox1.Size = new System.Drawing.Size(799, 168);
             this.guna2TextBox1.TabIndex = 2;
+            this.guna2TextBox1.Text = "DIRECÇÃO DE INFORMAÇÕES POLICIAIS\r\n\r\nDEPARTAMENTO DE ESTUDO PLANEAMENTO E ANÁLISE" +
+    "\r\n\r\nSECÇÃO DE PLANEAMENTO E CONTROLO";
             this.guna2TextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // guna2PictureBox1
@@ -327,6 +320,7 @@
             this.Padding = new System.Windows.Forms.Padding(2);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Entrar";
+            this.Load += new System.EventHandler(this.FrmEntrar_Load);
             this.Panel1.ResumeLayout(false);
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel1.PerformLayout();
@@ -338,6 +332,7 @@
             this.guna2Panel4.ResumeLayout(false);
             this.guna2Panel4.PerformLayout();
             this.guna2Panel2.ResumeLayout(false);
+            this.guna2Panel2.PerformLayout();
             this.FormTopBorder.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
             this.ResumeLayout(false);
