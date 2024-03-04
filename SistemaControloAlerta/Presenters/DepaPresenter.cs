@@ -134,7 +134,11 @@ namespace SistemaControloAlerta.Presenters
         {
             var model = new DepaModel();
 
-            model.Id = Convert.ToInt32(view.DepaId);
+            int id;
+
+            int.TryParse(view.DepaId, out id);
+
+            model.Id = id;
             model.Assunto = view.Assunto;
             model.Conteudo_despacho = view.Conteudo_despacho;
             model.Area_afectada = view.Area_afectada;
