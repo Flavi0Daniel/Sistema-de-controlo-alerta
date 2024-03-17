@@ -1,6 +1,6 @@
 ﻿namespace SistemaControloAlerta
 {
-    partial class FrmEntrar
+    partial class EntrarView
     {
         /// <summary>
         /// Required designer variable.
@@ -33,6 +33,7 @@
             this.gunaLabel1 = new System.Windows.Forms.Label();
             this.gunaLabel2 = new System.Windows.Forms.Label();
             this.guna2Panel5 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
             this.BtnEntrar = new ePOSOne.btnProduct.Button_WOC();
             this.guna2ShadowPanel1 = new System.Windows.Forms.Panel();
             this.guna2Panel3 = new System.Windows.Forms.Panel();
@@ -41,11 +42,10 @@
             this.guna2Panel4 = new System.Windows.Forms.Panel();
             this.TxtSenha = new System.Windows.Forms.TextBox();
             this.gunaLabel4 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.guna2Panel2 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.FormTopBorder = new System.Windows.Forms.Panel();
             this.BtnSair = new FontAwesome.Sharp.IconButton();
-            this.guna2TextBox1 = new System.Windows.Forms.TextBox();
             this.guna2PictureBox1 = new System.Windows.Forms.PictureBox();
             this.Panel1.SuspendLayout();
             this.guna2Panel1.SuspendLayout();
@@ -110,14 +110,26 @@
             // guna2Panel5
             // 
             this.guna2Panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))));
+            this.guna2Panel5.Controls.Add(this.label2);
             this.guna2Panel5.Controls.Add(this.BtnEntrar);
             this.guna2Panel5.Controls.Add(this.guna2ShadowPanel1);
-            this.guna2Panel5.Controls.Add(this.textBox1);
             this.guna2Panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.guna2Panel5.Location = new System.Drawing.Point(0, 348);
             this.guna2Panel5.Name = "guna2Panel5";
             this.guna2Panel5.Size = new System.Drawing.Size(805, 507);
             this.guna2Panel5.TabIndex = 16;
+            // 
+            // label2
+            // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.Yellow;
+            this.label2.Location = new System.Drawing.Point(-5, 3);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(795, 47);
+            this.label2.TabIndex = 17;
+            this.label2.Text = "SISTEMA DE GRAU DE CUMPRIMENTO";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // BtnEntrar
             // 
@@ -220,32 +232,30 @@
             this.gunaLabel4.TabIndex = 14;
             this.gunaLabel4.Text = "Senha";
             // 
-            // textBox1
-            // 
-            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))));
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.ForeColor = System.Drawing.Color.Yellow;
-            this.textBox1.Location = new System.Drawing.Point(0, 0);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(805, 31);
-            this.textBox1.TabIndex = 9;
-            this.textBox1.Text = "SISTEMA DE GRAU DE CUMPRIMENTO";
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // guna2Panel2
             // 
             this.guna2Panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))));
+            this.guna2Panel2.Controls.Add(this.label1);
             this.guna2Panel2.Controls.Add(this.FormTopBorder);
-            this.guna2Panel2.Controls.Add(this.guna2TextBox1);
             this.guna2Panel2.Controls.Add(this.guna2PictureBox1);
             this.guna2Panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.guna2Panel2.Location = new System.Drawing.Point(0, 0);
             this.guna2Panel2.Name = "guna2Panel2";
             this.guna2Panel2.Size = new System.Drawing.Size(805, 348);
             this.guna2Panel2.TabIndex = 10;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(249)))), ((int)(((byte)(246)))));
+            this.label1.Location = new System.Drawing.Point(7, 182);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(795, 141);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "DIRECÇÃO DE INFORMAÇÕES POLICIAIS\r\n\r\nDEPARTAMENTO DE ESTUDO PLANEAMENTO E ANÁLISE" +
+    "\r\n\r\nSECÇÃO DE PLANEAMENTO E CONTROLO";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // FormTopBorder
             // 
@@ -255,7 +265,6 @@
             this.FormTopBorder.Name = "FormTopBorder";
             this.FormTopBorder.Size = new System.Drawing.Size(805, 59);
             this.FormTopBorder.TabIndex = 9;
-            this.FormTopBorder.MouseDown += new System.Windows.Forms.MouseEventHandler(this.FormTopBorder_MouseDown);
             // 
             // BtnSair
             // 
@@ -266,33 +275,12 @@
             this.BtnSair.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(249)))), ((int)(((byte)(246)))));
             this.BtnSair.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.BtnSair.IconSize = 16;
-            this.BtnSair.Location = new System.Drawing.Point(754, 21);
+            this.BtnSair.Location = new System.Drawing.Point(747, 3);
             this.BtnSair.Name = "BtnSair";
-            this.BtnSair.Size = new System.Drawing.Size(32, 16);
+            this.BtnSair.Size = new System.Drawing.Size(55, 53);
             this.BtnSair.TabIndex = 6;
             this.BtnSair.UseVisualStyleBackColor = true;
             this.BtnSair.Click += new System.EventHandler(this.BtnSair_Click);
-            // 
-            // guna2TextBox1
-            // 
-            this.guna2TextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.guna2TextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(0)))), ((int)(((byte)(128)))));
-            this.guna2TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.guna2TextBox1.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.guna2TextBox1.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.guna2TextBox1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.guna2TextBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(249)))), ((int)(((byte)(246)))));
-            this.guna2TextBox1.Location = new System.Drawing.Point(3, 178);
-            this.guna2TextBox1.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
-            this.guna2TextBox1.Multiline = true;
-            this.guna2TextBox1.Name = "guna2TextBox1";
-            this.guna2TextBox1.ReadOnly = true;
-            this.guna2TextBox1.Size = new System.Drawing.Size(799, 168);
-            this.guna2TextBox1.TabIndex = 2;
-            this.guna2TextBox1.Text = "DIRECÇÃO DE INFORMAÇÕES POLICIAIS\r\n\r\nDEPARTAMENTO DE ESTUDO PLANEAMENTO E ANÁLISE" +
-    "\r\n\r\nSECÇÃO DE PLANEAMENTO E CONTROLO";
-            this.guna2TextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // guna2PictureBox1
             // 
@@ -305,7 +293,7 @@
             this.guna2PictureBox1.TabIndex = 3;
             this.guna2PictureBox1.TabStop = false;
             // 
-            // FrmEntrar
+            // EntrarView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -316,23 +304,22 @@
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
-            this.Name = "FrmEntrar";
+            this.Name = "EntrarView";
             this.Padding = new System.Windows.Forms.Padding(2);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Entrar";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FrmEntrar_Load);
             this.Panel1.ResumeLayout(false);
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel1.PerformLayout();
             this.guna2Panel5.ResumeLayout(false);
-            this.guna2Panel5.PerformLayout();
             this.guna2ShadowPanel1.ResumeLayout(false);
             this.guna2Panel3.ResumeLayout(false);
             this.guna2Panel3.PerformLayout();
             this.guna2Panel4.ResumeLayout(false);
             this.guna2Panel4.PerformLayout();
             this.guna2Panel2.ResumeLayout(false);
-            this.guna2Panel2.PerformLayout();
             this.FormTopBorder.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
             this.ResumeLayout(false);
@@ -343,11 +330,9 @@
 
         private System.Windows.Forms.Panel Panel1;
         private System.Windows.Forms.PictureBox guna2PictureBox1;
-        private System.Windows.Forms.TextBox guna2TextBox1;
         private System.Windows.Forms.Label gunaLabel2;
         private System.Windows.Forms.Label gunaLabel1;
         private System.Windows.Forms.Panel guna2Panel1;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Panel guna2Panel2;
         private System.Windows.Forms.ComboBox CmbNivelAcesso;
         private System.Windows.Forms.Label gunaLabel4;
@@ -360,6 +345,8 @@
         private ePOSOne.btnProduct.Button_WOC BtnEntrar;
         private FontAwesome.Sharp.IconButton BtnSair;
         private System.Windows.Forms.Panel FormTopBorder;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
     }
 }
 

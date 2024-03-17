@@ -155,7 +155,7 @@ namespace SistemaControloAlerta._Repositories
         {
             var depaList = new List<DepaModel>();
             int depaId = int.TryParse(value, out _) ? Convert.ToInt32(value) : 0;
-            string depaAssunto = value;
+            string conteudoDespacho = value;
             using (var connection = new SqlConnection(connectionString))
             using (var command = connection.CreateCommand())
             {
@@ -171,11 +171,11 @@ namespace SistemaControloAlerta._Repositories
                             ELSE ''
                         END AS [Grau de comprimento]
                     FROM
-                        tbl_Depart_Est_Plan_Anal WHERE Num=@id or Assunto LIKE '%'+@assunto+'%' ORDER BY Num DESC";
+                        tbl_Depart_Est_Plan_Anal WHERE Num=@id or conteudo_Despacho LIKE '%'+@conteudoDespacho+'%' ORDER BY Num DESC";
                 connection.Open();
                 command.CommandText = query;
                 command.Parameters.Add("@id", SqlDbType.Int).Value = depaId;
-                command.Parameters.Add("@assunto", SqlDbType.NVarChar).Value = depaAssunto;
+                command.Parameters.Add("@conteudoDespacho", SqlDbType.NVarChar).Value = conteudoDespacho;
                 using (var reader = command.ExecuteReader())
                 {
                     while (reader.Read())

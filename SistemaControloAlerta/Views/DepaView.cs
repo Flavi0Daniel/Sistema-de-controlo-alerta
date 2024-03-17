@@ -64,7 +64,7 @@ namespace SistemaControloAlerta.Views
 
         //Others
         private const int milisecondsInHour = 3600000;
-        private const int secondsInMinute = 60000;
+        private const int milisecondsInMinute = 60000;
         private const int hour = 1;
         private bool isHide = false;
 
@@ -224,14 +224,14 @@ namespace SistemaControloAlerta.Views
             int currentTime = time.Invoke();
 
             // Alerts
-            alertTimer = new System.Timers.Timer(currentTime * milisecondsInHour);
+            alertTimer = new System.Timers.Timer(currentTime * milisecondsInMinute);
 
             alertTimer.Elapsed += new ElapsedEventHandler((object sender, ElapsedEventArgs e) =>
             {
 
                 if (currentTime != time.Invoke()) { 
                     currentTime = time.Invoke();
-                    alertTimer.Interval = currentTime * milisecondsInHour;
+                    alertTimer.Interval = currentTime * milisecondsInMinute;
                     alertTimer.Stop();
                     alertTimer.Start();
                 }
@@ -243,7 +243,7 @@ namespace SistemaControloAlerta.Views
                     sctx.Post((Object state) =>
                     {
                         // Your code that interacts with UI elements
-                        Alert("Há vencimentos!", Form_Alert.enmType.Warning);
+                        Alert("Alerta de grau de cumprimento!", Form_Alert.enmType.Warning);
                     }, null);
                 }
             }); // handler - what to do when time elaps
@@ -329,7 +329,7 @@ namespace SistemaControloAlerta.Views
 
         private bool ValidarAutorizacao() {
 
-            string resultado = FrmEntrar.InputBoxDialog();
+            string resultado = EntrarView.InputBoxDialog();
 
             /* pegar a senha. */
 
@@ -355,99 +355,6 @@ namespace SistemaControloAlerta.Views
                 }
             }
             return false;
-        }
-
-
-        // Resize borderless form
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            e.Graphics.FillRectangle(Brushes.Transparent, Top());
-            e.Graphics.FillRectangle(Brushes.Transparent, Left());
-            e.Graphics.FillRectangle(Brushes.Transparent, Right());
-            e.Graphics.FillRectangle(Brushes.Transparent, Bottom());
-        }
-
-        private const int HTLEFT = 10;
-        private const int HTRIGHT = 11;
-        private const int HTTOP = 12;
-        private const int HTTOPLEFT = 13;
-        private const int HTTOPRIGHT = 14;
-        private const int HTBOTTOM = 15;
-        private const int HTBOTTOMLEFT = 16;
-        private const int HTBOTTOMRIGHT = 17;
-
-        protected override void WndProc(ref Message m)
-        {
-            base.WndProc(ref m);
-            if (m.Msg == 0x84)
-            {
-                var mp = this.PointToClient(Cursor.Position);
-
-                if (TopLeft().Contains(mp))
-                    m.Result = (IntPtr)HTTOPLEFT;
-                else if (TopRight().Contains(mp))
-                    m.Result = (IntPtr)HTTOPRIGHT;
-                else if (BottomLeft().Contains(mp))
-                    m.Result = (IntPtr)HTBOTTOMLEFT;
-                else if (BottomRight().Contains(mp))
-                    m.Result = (IntPtr)HTBOTTOMRIGHT;
-                else if (Top().Contains(mp))
-                    m.Result = (IntPtr)HTTOP;
-                else if (Left().Contains(mp))
-                    m.Result = (IntPtr)HTLEFT;
-                else if (Right().Contains(mp))
-                    m.Result = (IntPtr)HTRIGHT;
-                else if (Bottom().Contains(mp))
-                    m.Result = (IntPtr)HTBOTTOM;
-            }
-        }
-
-        private Random rng = new Random();
-        public Color randomColour()
-        {
-            return Color.FromArgb(255, rng.Next(255), rng.Next(255), rng.Next(255));
-        }
-
-        const int ImaginaryBorderSize = 2;
-
-        public new Rectangle Top()
-        {
-            return new Rectangle(0, 0, this.ClientSize.Width, ImaginaryBorderSize);
-        }
-
-        public new Rectangle Left()
-        {
-            return new Rectangle(0, 0, ImaginaryBorderSize, this.ClientSize.Height);
-        }
-
-        public new Rectangle Bottom()
-        {
-            return new Rectangle(0, this.ClientSize.Height - ImaginaryBorderSize, this.ClientSize.Width, ImaginaryBorderSize);
-        }
-
-        public new Rectangle Right()
-        {
-            return new Rectangle(this.ClientSize.Width - ImaginaryBorderSize, 0, ImaginaryBorderSize, this.ClientSize.Height);
-        }
-
-        public Rectangle TopLeft()
-        {
-            return new Rectangle(0, 0, ImaginaryBorderSize, ImaginaryBorderSize);
-        }
-
-        public Rectangle TopRight()
-        {
-            return new Rectangle(this.ClientSize.Width - ImaginaryBorderSize, 0, ImaginaryBorderSize, ImaginaryBorderSize);
-        }
-
-        public Rectangle BottomLeft()
-        {
-            return new Rectangle(0, this.ClientSize.Height - ImaginaryBorderSize, ImaginaryBorderSize, ImaginaryBorderSize);
-        }
-
-        public Rectangle BottomRight()
-        {
-            return new Rectangle(this.ClientSize.Width - ImaginaryBorderSize, this.ClientSize.Height - ImaginaryBorderSize, ImaginaryBorderSize, ImaginaryBorderSize);
         }
 
         //Structs
@@ -602,17 +509,6 @@ namespace SistemaControloAlerta.Views
             this.Close();
         }
 
-        //Drag Form
-        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
-        private extern static void ReleaseCapture();
-        [DllImport("user32.DLL", EntryPoint = "SendMessage")]
-        private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
-        private void PanelTitlebar_MouseDown(object sender, MouseEventArgs e)
-        {
-            ReleaseCapture();
-            SendMessage(this.Handle, 0x112, 0xf012, 0);
-        }
-
         public void Alert(string msg, Form_Alert.enmType type)
         {
             Form_Alert frm = new Form_Alert();
@@ -651,16 +547,20 @@ namespace SistemaControloAlerta.Views
                 }
                 else if (row.Cells[9].Value.ToString() == "NÃO CUMPRIDA")
                 {
-                    row.Cells[9].Style.BackColor = Color.IndianRed;
+                    row.Cells[9].Style.BackColor = Color.OrangeRed;
                 }
 
                 if (row.Cells[8].Value.ToString() == "VENCEU")
                 {
-                    row.Cells[8].Style.BackColor = Color.LightGreen;
+                    row.Cells[8].Style.BackColor = Color.Red;
+                }
+                else if (row.Cells[8].Value.ToString() == "VENCEU HOJE")
+                {
+                    row.Cells[8].Style.BackColor = Color.Orange;
                 }
                 else
                 {
-                    row.Cells[8].Style.BackColor = Color.Orange;
+                    row.Cells[8].Style.BackColor = Color.LightGreen;
                 }
             }
         }
