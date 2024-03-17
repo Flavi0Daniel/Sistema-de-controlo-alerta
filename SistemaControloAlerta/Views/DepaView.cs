@@ -3,11 +3,13 @@ using SistemaControloAlerta._Repositories;
 using SistemaControloAlerta.Presenters;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.IO.Pipes;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.ComTypes;
 using System.Security.AccessControl;
 using System.Security.Principal;
 using System.Threading;
@@ -110,7 +112,7 @@ namespace SistemaControloAlerta.Views
 
             // Begin async wait for connections
             _pipeServer.BeginWaitForConnection(OnPipeConnected, null);
-            
+
         }
 
         private void OnPipeConnected(IAsyncResult ar)
@@ -229,7 +231,8 @@ namespace SistemaControloAlerta.Views
             alertTimer.Elapsed += new ElapsedEventHandler((object sender, ElapsedEventArgs e) =>
             {
 
-                if (currentTime != time.Invoke()) { 
+                if (currentTime != time.Invoke())
+                {
                     currentTime = time.Invoke();
                     alertTimer.Interval = currentTime * milisecondsInMinute;
                     alertTimer.Stop();
@@ -251,7 +254,8 @@ namespace SistemaControloAlerta.Views
             alertTimer.Start();
         }
 
-        public void OnCmbNotificationSavedItem(Func<int> time) {
+        public void OnCmbNotificationSavedItem(Func<int> time)
+        {
             // init combobox
 
             Dictionary<string, int> comboSource = new Dictionary<string, int>();
@@ -321,13 +325,15 @@ namespace SistemaControloAlerta.Views
         private void EditarMenuItem_Click(object sender, EventArgs e)
         {
 
-            if (ValidarAutorizacao()) {
+            if (ValidarAutorizacao())
+            {
                 DepaEditEvent?.Invoke(this, EventArgs.Empty);
                 openTab(2);
             }
         }
 
-        private bool ValidarAutorizacao() {
+        private bool ValidarAutorizacao()
+        {
 
             string resultado = EntrarView.InputBoxDialog();
 
@@ -337,7 +343,8 @@ namespace SistemaControloAlerta.Views
 
             /* verifica se o resultado é uma string vazia o que indica que foi cancelado. */
 
-            if (resultado != ""){
+            if (resultado != "")
+            {
 
                 if (!string.IsNullOrEmpty(resultado))
                 {
@@ -346,10 +353,12 @@ namespace SistemaControloAlerta.Views
 
                 /* Verifica se a senha confere. */
 
-                if (resultado != password){
+                if (resultado != password)
+                {
                     MessageBox.Show("Senha Incorreta.");
                 }
-                else{
+                else
+                {
                     MessageBox.Show("Senha válida.");
                     return true;
                 }
@@ -567,7 +576,7 @@ namespace SistemaControloAlerta.Views
 
         private void DepaView_FormClosing(object sender, FormClosingEventArgs e)
         {
-            
+
         }
 
         private void btnAlterarSenhaAdm_Click(object sender, EventArgs e)
@@ -579,6 +588,101 @@ namespace SistemaControloAlerta.Views
         private void cmbNotificacoes_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true;
+        }
+
+
+        // Abrir file explorer numa localização especifica
+        // https://www.codeproject.com/Questions/852563/How-to-open-file-explorer-at-given-location-in-csh
+        private void OpenFolder(string folderPath)
+        {
+            if (Directory.Exists(folderPath))
+            {
+                ProcessStartInfo startInfo = new ProcessStartInfo
+                {
+                    Arguments = folderPath,
+                    FileName = "explorer.exe"
+                };
+
+                Process.Start(startInfo);
+
+            }
+            else
+            {
+                MessageBox.Show(string.Format("{0} Directory does not exist!", folderPath));
+            }
+
+        }
+
+        // Extra exportar datagridview para excel
+        // https://www.c-sharpcorner.com/UploadFile/hrojasara/export-datagridview-to-excel-in-C-Sharp/
+
+        private void ExportDataGridViewToExcel()
+        {
+            string excelFilePath = System.IO.Path.Combine(Application.UserAppDataPath, "depa.xlsx");
+
+            // creating Excel Application  
+            Microsoft.Office.Interop.Excel._Application app = new Microsoft.Office.Interop.Excel.Application();
+            // creating new WorkBook within Excel application  
+            Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add(Type.Missing);
+            // creating new Excelsheet in workbook  
+            Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
+            // see the excel sheet behind the program  
+            app.Visible = false;
+            // get the reference of first sheet. By default its name is Sheet1.  
+            // store its reference to worksheet  
+            // worksheet = workbook.Sheets["Folha1"];
+            worksheet = workbook.ActiveSheet;
+            // changing the name of active sheet  
+            worksheet.Name = "Exported from DEPA software";
+            // storing header part in Excel  
+            for (int i = 1; i < DgvDEPA.Columns.Count + 1; i++)
+            {
+                worksheet.Cells[1, i] = DgvDEPA.Columns[i - 1].HeaderText;
+            }
+            // storing Each row and column value to excel sheet  
+            for (int i = 0; i < DgvDEPA.Rows.Count - 1; i++)
+            {
+                for (int j = 0; j < DgvDEPA.Columns.Count; j++)
+                {
+                    worksheet.Cells[i + 2, j + 1] = DgvDEPA.Rows[i].Cells[j].Value.ToString();
+                }
+            }
+            // save the application  
+
+            try
+            {
+                if (System.IO.File.Exists(excelFilePath))
+                {
+                    System.IO.File.Delete(excelFilePath);
+                }
+                workbook.SaveAs(excelFilePath, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlExclusive, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+            }
+            catch (Exception ex)
+            {
+                // Handle deletion or saving errors gracefully
+                MessageBox.Show(ex.Message);
+            }
+
+            // disposes
+
+            try
+            {
+                Marshal.ReleaseComObject(worksheet);
+                workbook.Close();
+                Marshal.ReleaseComObject(workbook);
+                app.Quit();
+                Marshal.FinalReleaseComObject(app);
+            }
+            catch (Exception) { }
+            app = null;
+
+            // open saved folder
+            OpenFolder(Application.UserAppDataPath);
+        }
+
+        private void btnExportar_Click(object sender, EventArgs e)
+        {
+            ExportDataGridViewToExcel();
         }
     }
 }

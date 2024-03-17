@@ -49,6 +49,7 @@
             this.tpListar = new System.Windows.Forms.TabPage();
             this.DgvDEPA = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnExportar = new FontAwesome.Sharp.IconButton();
             this.BtnPesquisar = new FontAwesome.Sharp.IconButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.TxtSearch = new System.Windows.Forms.TextBox();
@@ -385,6 +386,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.btnExportar);
             this.panel2.Controls.Add(this.BtnPesquisar);
             this.panel2.Controls.Add(this.panel1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
@@ -392,6 +394,20 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1001, 102);
             this.panel2.TabIndex = 7;
+            // 
+            // btnExportar
+            // 
+            this.btnExportar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExportar.IconChar = FontAwesome.Sharp.IconChar.FloppyDisk;
+            this.btnExportar.IconColor = System.Drawing.Color.Black;
+            this.btnExportar.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnExportar.IconSize = 32;
+            this.btnExportar.Location = new System.Drawing.Point(913, 23);
+            this.btnExportar.Name = "btnExportar";
+            this.btnExportar.Size = new System.Drawing.Size(69, 60);
+            this.btnExportar.TabIndex = 5;
+            this.btnExportar.UseVisualStyleBackColor = true;
+            this.btnExportar.Click += new System.EventHandler(this.btnExportar_Click);
             // 
             // BtnPesquisar
             // 
@@ -924,5 +940,6 @@
         private System.Windows.Forms.TabPage tbNotificacoes;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ComboBox cmbNotificacoes;
+        private FontAwesome.Sharp.IconButton btnExportar;
     }
 }
