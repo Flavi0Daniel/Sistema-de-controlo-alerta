@@ -535,7 +535,7 @@ namespace SistemaControloAlerta.Views
             this.TopMost = true;
             Activate();
             this.TopMost = false;
-            WindowState = FormWindowState.Normal;
+            WindowState = FormWindowState.Maximized;
             ntfIcon.Visible = false;
             isHide = false;
         }
