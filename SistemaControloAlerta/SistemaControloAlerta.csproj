@@ -143,7 +143,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\WhatsApp Image 2024-01-04 at 18.18.51.jpeg" />
+    <None Include="Resources\logo.jpeg" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="DB\DB.mdf">
@@ -154,6 +154,7 @@
     </Content>
     <Content Include="DB\SQL.sql" />
     <Content Include="logo.ico" />
+    <None Include="Resources\logo1.bmp" />
     <None Include="Resources\warning.png" />
     <None Include="Resources\success.png" />
     <None Include="Resources\info.png" />

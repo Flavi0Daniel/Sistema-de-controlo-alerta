@@ -225,7 +225,7 @@
             // BtnHome
             // 
             this.BtnHome.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.BtnHome.Image = global::SistemaControloAlerta.Properties.Resources.WhatsApp_Image_2024_01_04_at_18_18_51;
+            this.BtnHome.Image = global::SistemaControloAlerta.Properties.Resources.logo;
             this.BtnHome.Location = new System.Drawing.Point(54, 12);
             this.BtnHome.Name = "BtnHome";
             this.BtnHome.Size = new System.Drawing.Size(113, 107);

@@ -285,7 +285,7 @@
             // guna2PictureBox1
             // 
             this.guna2PictureBox1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.guna2PictureBox1.Image = global::SistemaControloAlerta.Properties.Resources.WhatsApp_Image_2024_01_04_at_18_18_51;
+            this.guna2PictureBox1.Image = global::SistemaControloAlerta.Properties.Resources.logo;
             this.guna2PictureBox1.Location = new System.Drawing.Point(361, 79);
             this.guna2PictureBox1.Name = "guna2PictureBox1";
             this.guna2PictureBox1.Size = new System.Drawing.Size(80, 80);
