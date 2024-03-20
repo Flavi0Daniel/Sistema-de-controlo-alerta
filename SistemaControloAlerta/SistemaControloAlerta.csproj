@@ -154,7 +154,6 @@
     </Content>
     <Content Include="DB\SQL.sql" />
     <Content Include="logo.ico" />
-    <None Include="Resources\logo1.bmp" />
     <None Include="Resources\warning.png" />
     <None Include="Resources\success.png" />
     <None Include="Resources\info.png" />
