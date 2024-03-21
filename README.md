@@ -1,5 +1,11 @@
 # SistemaControloAlerta
 
+## Softwares necessários para rodar no computador cliente
+
+.Net Framework Runtime 4.8.1 => https://dotnet.microsoft.com/en-us/download/dotnet-framework/thank-you/net481-offline-installer
+
+Sql Server 2022 Local database => https://download.microsoft.com/download/3/8/d/38de7036-2433-4207-8eae-06e247e17b25/SqlLocalDB.msi
+
 Playlist usada para implementar MVP...
 
 https://www.youtube.com/playlist?list=PLwG-AtjFaHdO4Xs6u9RZkYchZL8M2H9Gj
